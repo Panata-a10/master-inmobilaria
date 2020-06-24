@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+  <head th:fragment="frgHead">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Agencia - Inmobilaria</title>
+        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link th:href="@{/css/styles.css}" rel="stylesheet" />
+    </head>
+<body>   
+
+        <!-- Begin Page Content -->
+				<div class="container-fluid">
+
+					<!-- Page Heading -->
+					<div
+						class="d-sm-flex align-items-center justify-content-between mb-4">
+						<h1 th:text="${title}" class="h3 mb-0 text-gray-800"></h1>
+					</div>					
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>Nombre</th>
+								<th>Provincia</th>
+								<th>Habitaciones</th>
+								<th>Caracteristicas</th>
+								<th>Direccion</th>
+								<th>Valor</th>
+								<th>Descripcion</th>
+								<th>Area</th>
+								<th><a class="btn btn-sm btn-success"
+									th:href="@{/inmobilaria/create}">&nbsp;Nuevo</a></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="i : ${inmobilarias}">
+								<td th:text="${i.nombre}"></td>
+								<td th:text="${i.provincia}"></td>
+								<td th:text="${i.habitaciones}"></td>
+								<td th:text="${i.caracteristicas}"></td>
+								<td th:text="${i.direccion}"></td>
+								<td th:text="${i.valor}"></td>
+								<td th:text="${i.descripcion}"></td>
+								<td th:text="${i.area_construccion}"></td>
+								<td><a class="btn btn-sm btn-warning"
+									th:href="@{/inmobilaria/update/} + ${i.idInmobilaria}">&nbsp;Actualizar</a>
+									<a class="btn btn-sm btn-info"
+									th:href="@{/inmobilaria/retrieve/} + ${i.idInmobilaria}">&nbsp;Consultar</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+</body>
+</html>

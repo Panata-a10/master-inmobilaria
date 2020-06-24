@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+  <head th:fragment="frgHead">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Agencia - Inmobilaria</title>
+        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link th:href="@{/css/styles.css}" rel="stylesheet" />
+    </head>
+<body>   
+
+        <!-- Begin Page Content -->
+				<div class="container-fluid">
+
+					<!-- Page Heading -->
+					<div
+						class="d-sm-flex align-items-center justify-content-between mb-4">
+						<h1 th:text="${title}" class="h3 mb-0 text-gray-800"></h1>
+					</div>					
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>Nombre</th>
+								<th>Apellido</th>
+								<th>Fecha Nacimiento</th>
+								<th>Cedula</th>
+								<th>Email</th>
+								<th>Usuario</th>
+								<th>Contraseña</th>
+								<th>Operacion</th>
+								<th><a class="btn btn-sm btn-success"
+									th:href="@{/cliente/create}">&nbsp;Nuevo</a></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="c : ${clientes}">
+								<td th:text="${c.nombre}"></td>
+								<td th:text="${c.apellido}"></td>
+								<td th:text="${c.fechaNac()}"></td>
+								<td th:text="${c.cedula}"></td>
+								<td th:text="${c.email}"></td>
+								<td th:text="${c.usuario}"></td>
+								<td th:text="${c.contrasena}"></td>
+								<td th:text="${c.operaciones}"></td>
+								<td><a class="btn btn-sm btn-warning"
+									th:href="@{/cliente/update/} + ${c.idpersona}">&nbsp;Actualizar</a>
+									<a class="btn btn-sm btn-info"
+									th:href="@{/cliente/retrieve/} + ${c.idpersona}">&nbsp;Consultar</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+  <head th:fragment="frgHead">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Agencia - Inmobilaria</title>
+        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link th:href="@{/css/styles.css}" rel="stylesheet" />
+    </head>
+<body>
+
+	<div class="row">
+		<div class="col-lg-7">
+			<div class="p-5">
+				<div class="text-center">
+					<h1 th:text="${administrador}" class="h4 text-gray-900 mb-4"></h1>
+				</div>
+				<hr>
+				<div class="form-group row">
+					<div class="col-sm-6 mb-3 mb-sm-0">
+						<label class="form-control form-control-user"
+							th:text="${administrador.nombre}"></label>
+					</div>
+					<div class="col-sm-6 mb-3 mb-sm-0">
+						<label class="form-control form-control-user"
+							th:text="${administrador.apellido}"></label>
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-sm-6 mb-3 mb-sm-0">
+						<label class="form-control form-control-user"
+							th:text="${administrador.cedula}"></label>
+					</div>
+					<div class="form-group col-sm-6">
+						<label class="form-control form-control-user"
+							th:text="${administrador.email}"></label>
+					</div>
+				</div>
+				<h6>Nacimiento:</h6>
+				<div class="form-group row">
+					<div class="col-sm-6 mb-3 mb-sm-0">
+						<label class="form-control form-control-user"
+							th:text="${administrador.fechaNac()}"></label>
+					</div>
+				</div>
+				<h6>Login:</h6>
+				<div class="form-group">
+					<div class="col-sm-6 mb-3 mb-sm-0">
+						<label class="form-control form-control-user"
+							th:text="${administrador.usuario}"></label>
+					</div>
+					<div class="col-sm-6 mb-3 mb-sm-0">
+						<label class="form-control form-control-user"
+							th:text="${administrador.contrasena}"></label>
+					</div>
+				</div>
+				<hr>	
+				<!--  -->										
+				<h5 class="modal-title">Desea eliminar el registro?</h5>
+				<div class="form-group row">
+					<div class="col-sm-6 mb-3 mb-sm-0">													
+						<a th:href="@{/administrador/delete/} + ${administrador.idpersona}"
+									class="btn btn-success btn-user btn-block">Confirmar</a>
+					</div>
+					<div class="col-sm-6 mb-3 mb-sm-0">
+						<a th:href="@{/administrador/list}"
+							class="btn btn-danger btn-user btn-block">Cancelar</a>
+					</div>
+				</div>											
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>
