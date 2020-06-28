@@ -14,9 +14,9 @@ public class MainController {
 		return "index";
 	}
 	
-	@GetMapping(value="/tables.html")
+	@GetMapping(value="/index1")
 	public String tables(Model model) {						
-		return "tables";
+		return "index1";
 	}
 	
 	@GetMapping(value="/register.html")
