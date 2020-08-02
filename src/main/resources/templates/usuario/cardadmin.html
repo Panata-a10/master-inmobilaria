@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<head th:replace="layout1 :: frgHead">
+</head>
+
+<body id="page-top">
+
+	<!-- Page Wrapper -->
+	<div id="wrapper">
+		<ul th:replace="layout1 :: frgSideBar"></ul>
+
+
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<!-- Main Content -->
+			<div id="content">
+
+				<nav th:replace="layout1 :: frgTopbar"></nav>
+
+				<!-- Begin Page Content -->
+				<div class="container-fluid">
+				<div class="text-center">
+					<h1 th:text="${title}" class="h4 text-gray-900 mb-4"></h1>
+				</div>
+						<div class="form-group row">
+							<div class="col-sm-3 mb-3 mb-sm-0">
+								<label>Nombre</label>
+							</div>
+							<div class="col-sm-6">
+								<label  class="form-control form-control-user"
+									th:text="${administrador.nombres}" ></label>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-3 mb-3 mb-sm-0">
+								<label>Apellido</label>
+							</div>
+							<div class="col-sm-6">
+								<label class="form-control form-control-user"
+									th:text="${administrador.apellidos}" placeholder="apellido"></label>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-3 mb-3 mb-sm-0">
+								<label>Cedula</label>
+							</div>
+							<div class="col-sm-6">
+								<label class="form-control form-control-user"
+									th:text="${administrador.cedula}" ></label>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-3 mb-3 mb-sm-0">
+								<label>Email</label>
+							</div>
+							<div class="col-sm-6">
+								<label class="form-control form-control-user"
+									th:text="${administrador.email}"></label>
+							</div>
+						</div>
+
+						<div class="form-group row">
+
+							<div class="col-sm-3 mb-3 mb-sm-0">
+								<label>Fech Nacimiento</label>
+							</div>
+							<div class="col-sm-6">
+								<label class="form-control form-control-user"
+									th:text="${administrador.fechaNac()}" ></label>
+							</div>
+						</div>
+						
+							<div class="form-group row">
+
+							<div class="col-sm-3 mb-3 mb-sm-0">
+								<label>Usuario</label>
+							</div>
+							<div class="col-sm-6">
+								<label class="form-control form-control-user"
+									th:text="${administrador.nombre}" ></label>
+							</div>
+						</div>
+
+						
+							<div class="form-group row">
+								<div class="col-sm-3 mb-3 mb-sm-0">
+									<label>Seguro de desea eliminar?</label>
+								</div>
+								<div class="col-sm-6">
+									<a class="btn btn-sm btn-danger btn-user"
+										th:href="@{/usuario/deleteAdmin/}+${administrador.idusuario}">Eliminar</a>
+									<a th:href="@{/usuario/list}" class="btn btn-warning btn-user">
+										Cancelar </a>
+								</div>
+							</div>
+										<hr>
+					<!-- Content Row -->
+					<div class="row"></div>
+					<!-- /.container-fluid -->
+
+				</div>
+				<!-- End of Main Content -->
+
+				<!-- Footer -->
+				<footer th:replace="layout1 :: frgFooter"> </footer>
+				<!-- End of Footer -->
+			</div>
+			<!-- End of Content Wrapper -->
+		</div>
+		<!-- End of Page Wrapper -->
+	</div>
+
+	<!-- Bootstrap core JavaScript-->
+	<script th:src="@{/admin/vendor/jquery/jquery.min.js}"></script>
+	<script th:src="@{/admin/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+
+	<!-- Core plugin JavaScript-->
+	<script th:src="@{/admin/vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script th:src="@{/admin/js/sb-admin-2.min.js}"></script>
+
+	<!-- Page level plugins -->
+	<script th:src="@{/admin/vendor/chart.js/Chart.min.js}"></script>
+
+	<!-- Page level custom scripts -->
+	<script th:src="@{/admin/js/demo/chart-area-demo.js}"></script>
+	<script th:src="@{/admin/js/demo/chart-pie-demo.js}"></script>
+</body>
+</html>S

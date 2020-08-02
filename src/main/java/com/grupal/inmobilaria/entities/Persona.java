@@ -3,31 +3,34 @@ package com.grupal.inmobilaria.entities;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 @MappedSuperclass
 public class Persona {
 
-	@Id
+	/*@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
 	@Column(name="id_persona")
 	private Integer idpersona;
+	*/
+	@Column(name="nombres")
+	@NotEmpty
+	@Size(max=35)
+	private String nombres;
 	
-	@Column(name="nombre")
-	private String nombre;
-	
-	@Column(name="apellido")
-	private String apellido;
+	@Column(name="apellidos")
+	@NotEmpty
+	@Size(max=35)
+	private String apellidos;
 	
 	@Column(name="fecha_nacimiento")
 	@Temporal(TemporalType.DATE)
@@ -35,13 +38,17 @@ public class Persona {
 	private Calendar fechaNacimienta;
 	
 	@Column(name="cedula")
+	//@NotEmpty
+	@Size(max=10)
 	private String cedula;
 	
 	@Column(name="email")
+	@Email
+	//@NotEmpty
+	@Size(max=50)
 	private String email;
 	
-	@Column(name="contrasena")
-	private String contrasena;
+	
 	
 	
 	public Persona() {
@@ -50,31 +57,24 @@ public class Persona {
 	
 	public Persona(Integer id) {
 		super();
-		this.idpersona = id;
 	}
 
-	public Integer getIdpersona() {
-		return idpersona;
+	
+
+	public String getNombres() {
+		return nombres;
 	}
 
-	public void setIdpersona(Integer idpersona) {
-		this.idpersona = idpersona;
+	public void setNombres(String nombres) {
+		this.nombres = nombres;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getApellidos() {
+		return apellidos;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getApellido() {
-		return apellido;
-	}
-
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
 	}
 
 	public Calendar getFechaNacimienta() {
@@ -101,21 +101,16 @@ public class Persona {
 		this.email = email;
 	}
 
-	public String getContrasena() {
-		return contrasena;
-	}
 
-	public void setContrasena(String contrasena) {
-		this.contrasena = contrasena;
-	}
 	
 	//
 	@Override
 	public String toString() {
-		return this.getApellido() + " " + this.getNombre();
+		return this.getApellidos() + " " + this.getNombres();
 	}
 	
 	public String fechaNac() {
+		if(this.fechaNacimienta == null) return "-";
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");		
 		return sdf.format(fechaNacimienta.getTime());
 	}	

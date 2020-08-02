@@ -1098,8 +1098,8 @@ pre code {
   }
 
   .col-md-3 {
-    flex: 0 0 25%;
-    max-width: 25%;
+    flex: 0 0 33.3333333333%;
+    max-width: 33.3333333333%;
   }
 
   .col-md-4 {
@@ -1315,8 +1315,8 @@ pre code {
   }
 
   .col-lg-4 {
-    flex: 0 0 33.3333333333%;
-    max-width: 33.3333333333%;
+    flex: 0 0 50%;
+    max-width: 50%;
   }
 
   .col-lg-5 {
@@ -10167,6 +10167,7 @@ header.masthead .masthead-heading {
     padding-bottom: 12.5rem;
   }
   header.masthead .masthead-subheading {
+  	
     font-size: 2.25rem;
     font-style: italic;
     line-height: 2.25rem;

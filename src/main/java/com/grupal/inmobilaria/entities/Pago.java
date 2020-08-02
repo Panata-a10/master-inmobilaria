@@ -25,7 +25,7 @@ public class Pago implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
-	@Column(name="id_pago")
+	@Column(name="pk_pago")
 	private Integer idPago;
 	
 	@Column(name="descripcion")

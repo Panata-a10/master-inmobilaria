@@ -17,15 +17,12 @@ import javax.persistence.Table;
 @Table(name="tipo_inmobilarias")
 public class TipoInmobilaria implements Serializable  {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
-	@Column(name="id_tip_inmobilaria")
+	@Column(name="pk_tip_inmobilaria")
 	private Integer idTipInmobilaria;
 	
 	@Column(name="descripcion")
@@ -75,14 +72,4 @@ public class TipoInmobilaria implements Serializable  {
 	public void setInmobilaria(List<Inmobilaria> inmobilaria) {
 		this.inmobilaria = inmobilaria;
 	}
-
-
-
-	
-
-
-	
-	
-	
-
 }

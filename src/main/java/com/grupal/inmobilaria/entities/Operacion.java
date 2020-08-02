@@ -23,7 +23,7 @@ public class Operacion implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
-	@Column(name="id_operacion")
+	@Column(name="pk_operacion")
 	private Integer idOperacion;
 	
 	@Column(name="descripcion")

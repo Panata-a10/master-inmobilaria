@@ -1,23 +1,22 @@
 package com.grupal.inmobilaria.controller;
 
-import java.util.List;
+//import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.grupal.inmobilaria.entities.Movimiento;
-import com.grupal.inmobilaria.service.IMovimientoService;
+//import com.grupal.inmobilaria.service.IMovimientoService;
 
 @Controller 
 @RequestMapping(value = "/movimiento")
 public class MovimientoController {
-	@Autowired
-	private IMovimientoService srvMovimiento;
+	
+	/*@Autowired
+	private IMovimientoService srvMovimiento;*/
 	
 	//Cada metodo en el controlador gestionaun peticion al backend
 	//a travez de una URL(puede ser escrita en el navegador)
@@ -32,7 +31,7 @@ public class MovimientoController {
 		return "movimiento/form";//la ubicacion de la vista
 	}
 	
-	
+	/*
 	@GetMapping(value = "/retrieve/{id}")
 	public String retrieve( @PathVariable(value="id")Integer id, Model model) {
 		
@@ -69,6 +68,6 @@ public class MovimientoController {
 		srvMovimiento.save(movimiento);
 		return "redirect:/movimiento/list";
 	}
-
+*/
 
 }

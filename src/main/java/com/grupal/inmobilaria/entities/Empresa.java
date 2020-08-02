@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -23,18 +25,25 @@ public class Empresa implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
-	@Column(name="id_empresa")
+	@Column(name="pk_empresa")
 	private Integer idEmpresa;
+	
 	@Column(name="nombre")
+	@NotEmpty
+	@Size(max=35)
 	private String nombre;
+	
 	@Column(name="direccion")
+	@NotEmpty
+	@Size(max=35)
 	private String direccion;
+	
 	@Column(name="telefono")
+	@NotEmpty
+	@Size(max=35)
 	private String telefono;
 	
-	@OneToMany(mappedBy="empresa" , fetch = FetchType.LAZY )
-	private List<Anunciante> anunciantes;
-
+	//
 	public Empresa() {
 		super();
 	}
@@ -43,6 +52,7 @@ public class Empresa implements Serializable {
 		this.idEmpresa =id;
 	}
 
+	//
 	public Integer getIdEmpresa() {
 		return idEmpresa;
 	}
@@ -67,11 +77,29 @@ public class Empresa implements Serializable {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
+	
+	/*
+	@OneToMany(mappedBy="empresa" , fetch = FetchType.LAZY )
+	private List<Anunciante> anunciantes;
+	
 	public List<Anunciante> getAnunciantes() {
 		return anunciantes;
 	}
 	public void setAnunciantes(List<Anunciante> anunciantes) {
 		this.anunciantes = anunciantes;
+	}	*/
+	
+	
+	
+	/* realcion con usuario anunciante*/
+	@OneToMany(mappedBy="empresa" , fetch = FetchType.LAZY )
+	private List<Usuario> usuario;
+
+	public List<Usuario> getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(List<Usuario> usuario) {
+		this.usuario = usuario;
 	}
 	
 	

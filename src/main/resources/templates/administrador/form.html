@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <head th:replace="layout1 :: frgHead">
 </head>
@@ -22,101 +22,136 @@
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
 				<div class="text-center">
-											<h1 th:text="${title}" class="h4 text-gray-900 mb-4"></h1>
-										</div>
-
-					<form class="user" th:action="@{/administrador/save}"
-						th:object="${administrador}" method="post">
-
-
-						<div class="form-group row">
-							<div class="col-sm-3 mb-3 mb-sm-0">
-								<label>Nombre</label>
-							</div>
-							<div class="col-sm-6">
-								<input type="text" class="form-control form-control-user"
-									th:field="*{nombre}" placeholder="Nombre">
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<div class="col-sm-3 mb-3 mb-sm-0">
-								<label>Apellido</label>
-							</div>
-							<div class="col-sm-6">
-								<input type="text" class="form-control form-control-user"
-									th:field="*{apellido}" placeholder="apellido">
-							</div>
-						</div>
-
-
-
-						<div class="form-group row">
-							<div class="col-sm-3 mb-3 mb-sm-0">
-								<label>Cedula</label>
-							</div>
-							<div class="col-sm-6">
-								<input type="text" class="form-control form-control-user"
-									th:field="*{cedula}" placeholder="Cedula">
-							</div>
-						</div>
-						<div class="form-group row">
-							<div class="col-sm-3 mb-3 mb-sm-0">
-								<label>Email</label>
-							</div>
-							<div class="col-sm-6">
-								<input type="email" class="form-control form-control-user"
-									th:field="*{email}" placeholder="email">
-							</div>
-						</div>
-
-						<div class="form-group row">
-
-							<div class="col-sm-3 mb-3 mb-sm-0">
-								<label>Fech Nacimiento</label>
-							</div>
-							<div class="col-sm-6">
-								<input type="date" class="form-control form-control-user"
-									th:field="*{fechaNacimienta}" placeholder="isbn">
-							</div>
-						</div>
-						
+					<h1 th:text="${title}" class="h4 text-gray-900 mb-4"></h1>
+				</div>
+				
+						<form class="user" 
+							th:action="@{/administrador/save}" th:object="${administrador}" 
+							enctype="multipart/form-data" method="post">
+							<hr>
+							<h6>DATOS GENERALES:</h6>
 							<div class="form-group row">
-
-							<div class="col-sm-3 mb-3 mb-sm-0">
-								<label>Usuario</label>
+								<div class="col-sm-4 mb-3 mb-sm-0">
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i
+												class="fas fa-user-tie"></i></span>
+										</div>
+										<input type="text" class="form-control"
+											th:errorclass="'form-control is-invalid'"
+											th:field="*{nombre}" placeholder="Nombres" />
+											<small class="invalid-feedback"
+										th:if="${#fields.hasErrors('nombre')}"
+										th:errors="*{nombre}"></small>
+									</div>
+								</div>
+								<div class="col-sm-4 mb-3 mb-sm-0">
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i
+												class="fas fa-user-tie"></i></span>
+										</div>
+										<input type="text" class="form-control"
+											th:errorclass="'form-control is-invalid'"
+											th:field="*{apellido}" placeholder="Apellidos" />
+											<small class="invalid-feedback"
+										th:if="${#fields.hasErrors('apellido')}"
+										th:errors="*{apellido}"></small>
+									</div>
+								</div>
+								<div class="col-sm-4 mb-3 mb-sm-0">
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i
+												class="far fa-address-card"></i></span>
+										</div>
+										<input type="text" class="form-control"
+											th:field="*{cedula}"
+											th:errorclass="'form-control is-invalid'"
+											placeholder="C&eacute;dula">
+											<small class="invalid-feedback"
+										th:if="${#fields.hasErrors('cedula')}"
+										th:errors="*{cedula}"></small>
+									</div>														
+								</div>	
+								<div class="col-sm-4 mb-3 mb-sm-0">
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i
+												class="fas fa-eye"></i></span>
+										</div>
+										<input type="text" class="form-control"
+											th:field="*{usuario}"
+											th:errorclass="'form-control is-invalid'"
+											placeholder="Usuario">
+											<small class="invalid-feedback"
+										th:if="${#fields.hasErrors('usuario')}"
+										th:errors="*{usuario}"></small>
+									</div>														
+								</div>
+								<div class="col-sm-4 mb-3 mb-sm-0">
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i
+												class="fas fa-edit"></i></span>
+										</div>
+										<input type="text" class="form-control"
+											th:field="*{contrasena}"
+											th:errorclass="'form-control is-invalid'"
+											placeholder="Contrasena">
+											<small class="invalid-feedback"
+										th:if="${#fields.hasErrors('contrasena')}"
+										th:errors="*{contrasena}"></small>
+									</div>														
+								</div>											
 							</div>
-							<div class="col-sm-6">
-								<input type="text" class="form-control form-control-user"
-									th:field="*{usuario}" placeholder="Usuario">
+							<div class="form-group row">									
+								<div class="col-sm-4 mb-3 mb-sm-0">
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i
+												class="fas fa-at"></i></span>
+										</div>
+										<input type="text" class="form-control"
+											th:field="*{email}"
+											th:errorclass="'form-control is-invalid'"
+											placeholder="Correo electr&oacute;nico">
+										<small class="invalid-feedback"
+										th:if="${#fields.hasErrors('email')}"
+										th:errors="*{email}"></small>
+									</div>
+								</div>
 							</div>
-						</div>
-
-						<div class="form-group row">
-
-							<div class="col-sm-3 mb-3 mb-sm-0">
-								<label>Contrasena</label>
+							<div class="form-group row">
+								<div class="col-sm-4 mb-3 mb-sm-0">
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i
+												class="fas fa-calendar-alt"></i></span>
+										</div>
+										<input type="date" class="form-control"
+											th:field="*{fechaNacimienta}">
+									</div>
+								</div>
 							</div>
-							<div class="col-sm-6">
-								<input type="password" class="form-control form-control-user"
-									th:field="*{contrasena}" >
+							<div class="form-group row">
+								<div class="col-sm-6 mb-3 mb-sm-0">
+									<input type="submit"
+										class="btn btn-success btn-user btn-block"
+										value="Guardar"/>
+								</div>
+								<div class="col-sm-6 mb-3 mb-sm-0">
+									<a th:href="@{/administrador/list}"
+										class="btn btn-danger btn-user btn-block">Cancelar</a>
+								</div>
 							</div>
-						</div>
+							
+							<input type="hidden" th:field="*{idadmin}" />
 
+						</form>
 
-						<input type="submit" class="btn btn-success btn-user "
-							value="Guardar"> <a th:href="@{/administrador/list}"
-							class="btn btn-danger btn-user "> Cancelar </a>
-						<hr>
-
-						<input type="hidden" th:field="*{idpersona}" />
-
-
-
-
-
-
-					</form>
+					
+					
 					<!-- Content Row -->
 					<div class="row">
 					</div>
@@ -134,9 +169,6 @@
 
 		</div>
 		<!-- End of Page Wrapper -->
-
-
-
 	</div>
 
 	<!-- Bootstrap core JavaScript-->
@@ -156,11 +188,5 @@
 	<!-- Page level custom scripts -->
 	<script th:src="@{/admin/js/demo/chart-area-demo.js}"></script>
 	<script th:src="@{/admin/js/demo/chart-pie-demo.js}"></script>
-
-
-
-
-
-
 </body>
 </html>

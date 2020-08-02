@@ -15,21 +15,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
-
 @Entity
 @Table(name="inmobilarias")
 public class Inmobilaria implements Serializable  {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
-	@Column(name="id_inmobilaria")
+	@Column(name="pk_inmobilaria")
 	private Integer idInmobilaria;
 	
 	@Column(name="nombre")
@@ -56,16 +51,17 @@ public class Inmobilaria implements Serializable  {
 	@Column(name="area_construccion")
 	private String area_construccion;
 	
-	@JoinColumn(name ="id_anunciante" , referencedColumnName="id_persona")
+	//relacion anunciante
+	@JoinColumn(name ="id_usuario" , referencedColumnName="pk_usuario")
 	@ManyToOne
-	private Anunciante anunciante;
+	private Usuario anunciante;
 	
-	@JoinColumn(name ="id_tipo" , referencedColumnName="id_tip_inmobilaria")
+	@JoinColumn(name ="id_tipo" , referencedColumnName="pk_tip_inmobilaria")
 	@ManyToOne
 	private TipoInmobilaria tipoImnobilaria;
 
 
-	@JoinColumn(name ="id_operaciones" , referencedColumnName="id_operacion")
+	@JoinColumn(name ="id_operaciones" , referencedColumnName="pk_operacion")
 	@ManyToOne
 	private Operacion operacion;
 	
@@ -155,11 +151,12 @@ public class Inmobilaria implements Serializable  {
 		this.area_construccion = area_construccion;
 	}
 
-	public Anunciante getAnunciante() {
+	
+	public Usuario getAnunciante() {
 		return anunciante;
 	}
 
-	public void setAnunciante(Anunciante anunciante) {
+	public void setAnunciante(Usuario anunciante) {
 		this.anunciante = anunciante;
 	}
 
@@ -186,10 +183,6 @@ public class Inmobilaria implements Serializable  {
 	public void setMovimiento(List<Movimiento> movimiento) {
 		this.movimiento = movimiento;
 	}
-	
-	
-	
-	
 	
 	
 

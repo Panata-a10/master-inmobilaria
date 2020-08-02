@@ -11,9 +11,17 @@ import com.grupal.inmobilaria.entities.Movimiento;
 
 @Service
 public class MovimientoService implements IMovimientoService {
+	
 	@Autowired  //inyeccion de dependencia
 	private IMovimiento dao;
 	
+	@Override
+	@Transactional
+	public List<Movimiento> findAll() {
+		
+		return (List<Movimiento>) dao.findAll();
+	}
+	/*
 	@Override
 	@Transactional
 	public void save(Movimiento a) {
@@ -41,5 +49,5 @@ public class MovimientoService implements IMovimientoService {
 		return (List<Movimiento>)dao.findAll();
 	}
 
-
+*/
 }

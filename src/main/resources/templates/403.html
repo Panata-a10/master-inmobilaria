@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout1 :: frgHead"></head>
+<body id="page-top">
+
+	<div id="wrapper">
+		<ul th:replace="layout :: frgSideBar"></ul>
+
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<div id="content">
+
+				<nav th:replace="layout1 :: frgTopBar"></nav>
+
+				<!-- Begin Page Content -->
+				<div class="container-fluid">
+
+					<!-- Page Heading -->
+					<div class="container">
+
+						<div class="card o-hidden border-0 shadow-lg my-5">
+							<div class="card-body p-0">
+								<!-- Nested Row within Card Body -->
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="p-6">
+											<div class="text-center">
+												<div class="error mx-auto">403</div>
+												<p class="lead text-gray-800 mb-5">No autorizado</p>
+												<p class="text-gray-500 mb-0">El usuario no tiene acceso
+													a esta p&aacute;gina</p>
+												<a th:href="@{/index.html}">&larr; Inicio</a>
+											</div>
+
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+
+
+				</div>
+				<!-- /.container-fluid -->
+
+			</div>
+
+			<footer th:replace="layout1 :: frgFooter"></footer>
+
+		</div>
+
+		<div th:replace="layout1 :: frgScripts"></div>
+
+	</div>
+
+
+</body>
+</html>

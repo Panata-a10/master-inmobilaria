@@ -24,23 +24,31 @@ public class Movimiento implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
-	@Column(name="id_movimimento")
+	@Column(name="pk_movimimento")
 	private Integer idMovimiento;
 	
 	
 	@Column(name="recomendacion")
 	private int recomendacion;
 	
-
-	@JoinColumn(name ="id_cliente" , referencedColumnName="id_persona")
+	//relacion con usuario
+	@JoinColumn(name ="id_cliente" , referencedColumnName="pk_usuario")
 	@ManyToOne
-	private Cliente cliente;
+	private Usuario cliente;
 	
-	@JoinColumn(name ="id_inmobilaria" , referencedColumnName="id_inmobilaria")
+	public Usuario getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Usuario cliente) {
+		this.cliente = cliente;
+	}
+
+	@JoinColumn(name ="id_inmobilaria" , referencedColumnName="pk_inmobilaria")
 	@ManyToOne
 	private Inmobilaria inmobilaria;
 	
-	@JoinColumn(name ="id_pago" , referencedColumnName="id_pago")
+	@JoinColumn(name ="id_pago" , referencedColumnName="pk_pago")
 	@ManyToOne
 	private Pago pago;
 
@@ -69,13 +77,7 @@ public class Movimiento implements Serializable{
 		this.recomendacion = recomendacion;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
-	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
 
 	public Inmobilaria getInmobilaria() {
 		return inmobilaria;
@@ -92,10 +94,5 @@ public class Movimiento implements Serializable{
 	public void setPago(Pago pago) {
 		this.pago = pago;
 	}
-	
-	
-	
-	
-	
 
 }
