@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="inmobilarias")
@@ -28,28 +30,41 @@ public class Inmobilaria implements Serializable  {
 	private Integer idInmobilaria;
 	
 	@Column(name="nombre")
+	@NotEmpty
+	@Size(max=50)
 	private String nombre;
 	
 	@Column(name="provincia")
+	@NotEmpty
+	@Size(max=25)
 	private String provincia;
 	
 	@Column(name="habitaciones")
-	private int habitaciones;
+	@NotEmpty
+	@Size(max=5)
+	private String habitaciones;
 	
 	@Column(name="caracteristicas")
 	private String caracteristicas;
 	
 	@Column(name="direccion")
+	@NotEmpty
+	@Size(max=50)
 	private String direccion;
 	
 	@Column(name="valor")
 	private float valor;
 	
 	@Column(name="descripcion")
+	@NotEmpty
+	@Size(max=50)
 	private String descripcion;
 	
 	@Column(name="area_construccion")
 	private String area_construccion;
+	
+	@Column(name="imagen")
+	private String imagen;
 	
 	//relacion anunciante
 	@JoinColumn(name ="id_usuario" , referencedColumnName="pk_usuario")
@@ -103,11 +118,11 @@ public class Inmobilaria implements Serializable  {
 		this.provincia = provincia;
 	}
 
-	public int getHabitaciones() {
+	public String getHabitaciones() {
 		return habitaciones;
 	}
 
-	public void setHabitaciones(int habitaciones) {
+	public void setHabitaciones(String habitaciones) {
 		this.habitaciones = habitaciones;
 	}
 
@@ -183,7 +198,13 @@ public class Inmobilaria implements Serializable  {
 	public void setMovimiento(List<Movimiento> movimiento) {
 		this.movimiento = movimiento;
 	}
-	
-	
 
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+	
 }

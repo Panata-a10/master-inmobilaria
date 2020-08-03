@@ -1,17 +1,29 @@
 package com.grupal.inmobilaria.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.grupal.inmobilaria.entities.Inmobilaria;
+import com.grupal.inmobilaria.entities.TipoInmobilaria;
 import com.grupal.inmobilaria.service.IInmobilariaService;
+import com.grupal.inmobilaria.service.ITipoInmobilariaService;
 
 @Controller 
 @RequestMapping(value = "/inmobilaria")
@@ -20,6 +32,9 @@ public class InmobilariaController {
 	
 	@Autowired
 	private IInmobilariaService srvInmobilaria;
+	
+	@Autowired 
+	private ITipoInmobilariaService srvTipoInmo;
 	
 	//Cada metodo en el controlador gestionaun peticion al backend
 	//a travez de una URL(puede ser escrita en el navegador)
@@ -30,6 +45,9 @@ public class InmobilariaController {
 		Inmobilaria inmobilaria = new Inmobilaria();
 		model.addAttribute("title", "Registro de nueva Inmobiliaria");
 		model.addAttribute("inmobilaria", inmobilaria); //similar VieBag
+		
+		List<TipoInmobilaria> tipoIs = srvTipoInmo.findAll();
+		model.addAttribute("tipo_inmobilarias", tipoIs);
 		
 		return "inmobilaria/form";//la ubicacion de la vista
 	}
@@ -47,6 +65,8 @@ public class InmobilariaController {
 	public String update(@PathVariable(value="id")Integer id,Model model) {
 		Inmobilaria inmobilaria = srvInmobilaria.findById(id);
 		model.addAttribute("inmobilaria", inmobilaria);
+		List<TipoInmobilaria> tipoIs = srvTipoInmo.findAll();
+		model.addAttribute("tipo_inmobilarias", tipoIs);
 		model.addAttribute("title", "Actualizado el registro de " + inmobilaria);
 		return "inmobilaria/form";
 	}
@@ -67,9 +87,50 @@ public class InmobilariaController {
 	
 	
 	@PostMapping(value = "/save")
-	public String save(Inmobilaria inmobilaria,Model model) {
-		srvInmobilaria.save(inmobilaria);
+	public String save(@Validated Inmobilaria inmobilaria,BindingResult result,Model model
+			,@RequestParam("photo") MultipartFile image,
+			SessionStatus status, RedirectAttributes flash) {
+		
+		try {
+			String message = "Registro agregado correctamente";
+			String titulo = "Registro de nueva Inmobiliaria";
+			
+			if(inmobilaria.getIdInmobilaria() != null) {
+				message = "Registro actualizado correctamente";
+				titulo = "Actualizando el registro de " + inmobilaria;
+			}
+			if(result.hasErrors()) {
+				model.addAttribute("title", titulo);
+				model.addAttribute("error", "Error al registrar");
+				return "inmobilaria/form";
+			}
+			if(result.hasErrors()) {
+				model.addAttribute("title", titulo);							
+				return "inmobilaria/form";				
+			}
+			//VALIDAR IMAGEN --> inicio
+			if (!image.isEmpty()) {
+				Path dir = Paths.get("src//main//resources//static//inmuebles");
+				String rootPath = dir.toFile().getAbsolutePath();
+				try {
+					byte[] bytes = image.getBytes();
+					Path rutaCompleta = Paths.get(rootPath + "//" + image.getOriginalFilename());
+					Files.write(rutaCompleta, bytes);
+					inmobilaria.setImagen(image.getOriginalFilename());
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}//fin
+			srvInmobilaria.save(inmobilaria);
+			status.setComplete();
+			flash.addFlashAttribute("success", message);
+			
+		}catch(Exception ex) {
+			flash.addFlashAttribute("error", ex.getMessage());
+		}
 		return "redirect:/inmobilaria/list";
+		
 	}
 	
 
