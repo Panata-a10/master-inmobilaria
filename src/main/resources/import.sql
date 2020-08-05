@@ -5,13 +5,14 @@ INSERT INTO operaciones (pk_operacion, descripcion) VALUES(2, 'Renta');
 
 
 INSERT INTO pagos (pk_pago, descripcion) VALUES(1, 'Transacion');
-INSERT INTO pagos (pk_pago, descripcion) VALUES(2, 'Transferencia');
-INSERT INTO pagos (pk_pago, descripcion) VALUES(1, 'Cheque');
+INSERT INTO pagos (pk_pago, descripcion) VALUES(2, 'Cambio');
+INSERT INTO pagos (pk_pago, descripcion) VALUES(3, 'Cheque');
 
 INSERT INTO tipo_inmobilarias (pk_tip_inmobilaria, descripcion) VALUES(1, 'Familiar');
 INSERT INTO tipo_inmobilarias (pk_tip_inmobilaria, descripcion) VALUES(2, 'Suit');
 INSERT INTO tipo_inmobilarias (pk_tip_inmobilaria, descripcion) VALUES(3, 'Departamento');
 INSERT INTO tipo_inmobilarias (pk_tip_inmobilaria, descripcion) VALUES(4, 'Terreno');
 INSERT INTO tipo_inmobilarias (pk_tip_inmobilaria, descripcion) VALUES(5, 'Inmueble');
+
 
 

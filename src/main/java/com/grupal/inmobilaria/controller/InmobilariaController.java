@@ -21,8 +21,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.grupal.inmobilaria.entities.Inmobilaria;
+import com.grupal.inmobilaria.entities.Operacion;
 import com.grupal.inmobilaria.entities.TipoInmobilaria;
 import com.grupal.inmobilaria.service.IInmobilariaService;
+import com.grupal.inmobilaria.service.IOperacionService;
 import com.grupal.inmobilaria.service.ITipoInmobilariaService;
 
 @Controller 
@@ -35,6 +37,10 @@ public class InmobilariaController {
 	
 	@Autowired 
 	private ITipoInmobilariaService srvTipoInmo;
+	
+
+	@Autowired 
+	private IOperacionService  srvOperacion;
 	
 	//Cada metodo en el controlador gestionaun peticion al backend
 	//a travez de una URL(puede ser escrita en el navegador)
@@ -49,6 +55,10 @@ public class InmobilariaController {
 		List<TipoInmobilaria> tipoIs = srvTipoInmo.findAll();
 		model.addAttribute("tipo_inmobilarias", tipoIs);
 		
+
+		List<Operacion> operacion = srvOperacion.findAll() ;
+		model.addAttribute("operaciones", operacion);
+		
 		return "inmobilaria/form";//la ubicacion de la vista
 	}
 	
@@ -58,16 +68,27 @@ public class InmobilariaController {
 		
 		Inmobilaria inmobilaria = srvInmobilaria.findById(id);
 		model.addAttribute("inmobilaria", inmobilaria);
-		model.addAttribute("title", "Datos de " + inmobilaria);
+		model.addAttribute("title", "Datos de " + inmobilaria.getNombre());
 		return "inmobilaria/card";
 	}
+	
+	
 	@GetMapping(value = "/update/{id}")
 	public String update(@PathVariable(value="id")Integer id,Model model) {
+		
+		
 		Inmobilaria inmobilaria = srvInmobilaria.findById(id);
 		model.addAttribute("inmobilaria", inmobilaria);
+		
 		List<TipoInmobilaria> tipoIs = srvTipoInmo.findAll();
 		model.addAttribute("tipo_inmobilarias", tipoIs);
-		model.addAttribute("title", "Actualizado el registro de " + inmobilaria);
+		
+
+		List<Operacion> operacion = srvOperacion.findAll() ;
+		model.addAttribute("operaciones", operacion);
+		
+		
+		model.addAttribute("title", "Actualizado el registro de " + inmobilaria.getNombre());
 		return "inmobilaria/form";
 	}
 	
@@ -76,6 +97,8 @@ public class InmobilariaController {
 		srvInmobilaria.delete(id);
 		return "redirect:/inmobilaria/list";
 	}
+	
+	
 	@GetMapping(value = "/list")
 	public String list(Model model) {
 		List<Inmobilaria> inmobilarias = srvInmobilaria.findAll();
@@ -97,7 +120,7 @@ public class InmobilariaController {
 			
 			if(inmobilaria.getIdInmobilaria() != null) {
 				message = "Registro actualizado correctamente";
-				titulo = "Actualizando el registro de " + inmobilaria;
+				titulo = "Actualizando el registro de " + inmobilaria.getNombre();
 			}
 			if(result.hasErrors()) {
 				model.addAttribute("title", titulo);
@@ -133,6 +156,17 @@ public class InmobilariaController {
 		
 	}
 	
+	
+	
+	/* =================Vista de todos los inmuebles ====================================*/
+	
+	@GetMapping(value = "/listall")
+	public String listall(Model model) {
+		List<Inmobilaria> inmobilarias = srvInmobilaria.findAll();
+		model.addAttribute("inmobilarias", inmobilarias);
+		model.addAttribute("title", "Listado de inmobilarias");
+		return ("inmobilaria/listall");
+	}
 
 
 

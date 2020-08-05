@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-<head th:replace="layout1 :: frgHead">
+<head th:replace="layout2 :: frgHead">
 </head>
 
 <body id="page-top">
 
 	<!-- Page Wrapper -->
 	<div id="wrapper">
-		<ul th:replace="layout1 :: frgSideBar"></ul>
+		<ul th:replace="layout2 :: frgSideBar"></ul>
 
 
 		<!-- Content Wrapper -->
@@ -17,7 +17,7 @@
 			<!-- Main Content -->
 			<div id="content">
 
-				<nav th:replace="layout1 :: frgTopbar"></nav>
+				<nav th:replace="layout2 :: frgTopbar"></nav>
 
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
@@ -27,74 +27,93 @@
 				
 				
 				<!--  -->
-				<hr>
+				
 				<div class="form-group row">
 					<div class="col-sm-3 mb-3 mb-sm-0">
-						<label 
-							>Nombre</label>
-					</div>
-					<div class="col-sm-6 ">
-						<label class="form-control form-control-user"
-							th:text="${anunciante.nombre}"></label>
-					</div>
-				</div>
-				<div class="form-group row">
-					<div class="col-sm-3 mb-3 mb-sm-0">
-						<label >Apellido</label>
+						<label >Provincia</label>
 					</div>
 					<div class="col-sm-6">
 						<label class="form-control form-control-user"
-							th:text="${anunciante.apellido}"></label>
+							th:text="${inmobilaria.provincia}"></label>
 					</div>
 				</div>
 				<div class="form-group row">
 					<div class="col-sm-3 mb-3 mb-sm-0">
 						<label 
-							>Cedula</label>
+							>Nro de habitaciones</label>
 					</div>
 					<div class="col-sm-6">
 						<label class="form-control form-control-user"
-							th:text="${anunciante.cedula}"></label>
+							th:text="${inmobilaria.habitaciones}"></label>
 					</div>
 				</div>
 				
 				<div class="form-group row">
 					<div class="col-sm-3 mb-3 mb-sm-0">
-						<label >email</label>
+						<label >Caracteristicas</label>
 					</div>
 					<div class="col-sm-6">
 						<label class="form-control form-control-user"
-							th:text="${anunciante.email}"></label>
+							th:text="${inmobilaria.caracteristicas}"></label>
 					</div>
 				</div>
 				
 				<div class="form-group row">
 					<div class="col-sm-3 mb-3 mb-sm-0">
-						<label >Fecha de nacimiento</label>
+						<label >Direccion</label>
 					</div>
 					<div class="col-sm-6">
 						<label class="form-control form-control-user"
-							th:text="${anunciante.fechaNac()}"></label>
+							th:text="${inmobilaria.direccion}"></label>
 					</div>
 				</div>
 				<div class="form-group row">
 					<div class="col-sm-3 mb-3 mb-sm-0">
-						<label >Usuario</label>
+						<label >Valor</label>
 					</div>
 					<div class="col-sm-6">
 						<label class="form-control form-control-user"
-							th:text="${anunciante.usuario}"></label>
+							th:text="${inmobilaria.valor}"></label>
 					</div>
 				</div>
 					<div class="form-group row">
 					<div class="col-sm-3 mb-3 mb-sm-0">
-						<label >Calificacion</label>
+						<label >Descripcion</label>
 					</div>
 					<div class="col-sm-6">
 						<label class="form-control form-control-user"
-							th:text="${anunciante.calificacion}"></label>
+							th:text="${inmobilaria.descripcion}"></label>
 					</div>
 				</div>
+				
+					</div>
+					<div class="form-group row">
+					<div class="col-sm-3 mb-3 mb-sm-0">
+						<label >Operacion</label>
+					</div>
+					<div class="col-sm-6">
+						<label class="form-control form-control-user"
+							th:text="${inmobilaria.operacion.descripcion}"></label>
+					</div>
+				</div>
+					
+				</div>
+					<div class="form-group row">
+					<div class="col-sm-3 mb-3 mb-sm-0">
+						<label >Tipo de inmobilaria</label>
+					</div>
+					<div class="col-sm-6">
+						<label class="form-control form-control-user"
+							th:text="${inmobilaria.tipoImnobilaria.descripcion}"></label>
+					</div>
+				</div>
+				
+				
+				
+			
+			
+				
+				
 						
 			
 				<hr>	
@@ -102,11 +121,11 @@
 				<h5 class="modal-title">Desea eliminar el registro?</h5>
 				<div class="form-group row">
 					<div class="col-sm-6 mb-3 mb-sm-0">													
-						<a th:href="@{/anunciante/delete/} + ${anunciante.idanunciante}"
+						<a th:href="@{/inmobilaria/delete/} + ${inmobilaria.idInmobilaria}"
 									class="btn btn-success btn-user btn-block">Confirmar</a>
 					</div>
 					<div class="col-sm-6 mb-3 mb-sm-0">
-						<a th:href="@{/anunciante/list}"
+						<a th:href="@{/inmobilaria/list}"
 							class="btn btn-danger btn-user btn-block">Cancelar</a>
 					</div>
 				</div>																
@@ -120,7 +139,7 @@
 				<!-- End of Main Content -->
 
 				<!-- Footer -->
-				<footer th:replace="layout1 :: frgFooter"> </footer>
+				<footer th:replace="layout2 :: frgFooter"> </footer>
 				<!-- End of Footer -->
 			</div>
 			<!-- End of Content Wrapper -->

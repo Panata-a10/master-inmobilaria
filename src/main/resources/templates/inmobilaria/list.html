@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-<head th:replace="layout1 :: frgHead">
+<head th:replace="layout2 :: frgHead">
 </head>
 
 <body id="page-top">
 
 	<!-- Page Wrapper -->
 	<div id="wrapper">
-		<ul th:replace="layout1 :: frgSideBar"></ul>
+		<ul th:replace="layout2 :: frgSideBar"></ul>
 		
 		
 		 <!-- Content Wrapper -->
@@ -17,7 +17,7 @@
       <!-- Main Content -->
       <div id="content">
 
-		<nav th:replace="layout1 :: frgTopbar"></nav>
+		<nav th:replace="layout2 :: frgTopbar"></nav>
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
@@ -32,7 +32,7 @@
  <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Anun</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Inmuebles</h6>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -53,14 +53,15 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="i : ${inmobilaria}">
+							<tr th:each="i : ${inmobilarias}">
 								<td th:text="${i.nombre}"></td>
 								<td th:text="${i.provincia}"></td>
 								<td th:text="${i.direccion}"></td>
+								<td th:text="${i.valor}"></td>
 								<td th:text="${i.habitaciones}"></td>
 								<td th:text="${i.descripcion}"></td>	
-								<td th:text="${l.tipoImnobilaria}"></td>
-								<td th:text="${l.operacion}"></td>													
+								<td th:text="${i.tipoImnobilaria.descripcion}"></td>
+								<td th:text="${i.operacion.descripcion}"></td>													
 								<td>
 								<a class="btn btn-sm btn-info"
 									th:href="@{/inmobilaria/update/} + ${i.idInmobilaria}"> <i class="fa fa-edit"></i></a>
@@ -84,7 +85,7 @@
       <!-- End of Main Content -->
 
       <!-- Footer -->
-      <footer th:replace="layout1 :: frgFooter">
+      <footer th:replace="layout2 :: frgFooter">
       </footer>
       <!-- End of Footer -->
 

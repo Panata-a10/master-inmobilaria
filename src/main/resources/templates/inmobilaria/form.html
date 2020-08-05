@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<head th:replace="layout1 :: frgHead">
+<head th:replace="layout2 :: frgHead">
 </head>
 
 <body id="page-top">
 
 	<!-- Page Wrapper -->
 	<div id="wrapper">
-		<ul th:replace="layout1 :: frgSideBar"></ul>
+		<ul th:replace="layout2 :: frgSideBar"></ul>
 
 
 		<!-- Content Wrapper -->
@@ -17,7 +17,7 @@
 			<!-- Main Content -->
 			<div id="content">
 
-				<nav th:replace="layout1 :: frgTopbar"></nav>
+				<nav th:replace="layout2 :: frgTopbar"></nav>
 
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
@@ -103,7 +103,36 @@
 										th:if="${#fields.hasErrors('descripcion')}"
 										th:errors="*{descripcion}"></small>
 									</div>														
-								</div>											
+								</div>
+								<div class="col-sm-4 mb-3 mb-sm-0">
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
+										</div>
+										<input type="text" class="form-control"
+											th:field="*{valor}"
+											th:errorclass="'form-control is-invalid'"
+											placeholder="Valor">
+											<small class="invalid-feedback"
+										th:if="${#fields.hasErrors('valor')}"
+										th:errors="*{valor}"></small>
+									</div>														
+								</div>	
+								
+								<div class="col-sm-4 mb-3 mb-sm-0">
+									<div class="input-group mb-3">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><i class="fas fa-pencil-ruler"></i></span>
+										</div>
+										<input type="text" class="form-control"
+											th:field="*{area_construccion}"
+											th:errorclass="'form-control is-invalid'"
+											placeholder="Area construccion en m2">
+											<small class="invalid-feedback"
+										th:if="${#fields.hasErrors('area_construccion')}"
+										th:errors="*{area_construccion}"></small>
+									</div>														
+								</div>												
 							</div>
 							<div class="form-group row">
 								<!-- RELACIONES -->							
@@ -123,8 +152,8 @@
 								<div class="col-sm-4 mb-3 mb-sm-0">	
 									<select class="form-control" th:field=*{operacion.idOperacion}>
 										<option value =0>-- Seleccione --</option>
-										<option th:each="o : ${operacion}" 
-											th:value="${o.operacion}" 
+										<option th:each="o : ${operaciones}" 
+											th:value="${o.idOperacion}" 
 											th:text="${o.descripcion}">
 										</option> 
 									</select>
@@ -163,7 +192,7 @@
 				<!-- End of Main Content -->
 
 				<!-- Footer -->
-				<footer th:replace="layout1 :: frgFooter"> </footer>
+				<footer th:replace="layout2 :: frgFooter"> </footer>
 				<!-- End of Footer -->
 
 			</div>

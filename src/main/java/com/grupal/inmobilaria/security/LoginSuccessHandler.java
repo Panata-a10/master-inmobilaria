@@ -1,6 +1,8 @@
 package com.grupal.inmobilaria.security;
 
 import java.io.IOException;
+import org.springframework.security.core.userdetails.User;
+
 import java.util.Calendar;
 
 import javax.servlet.ServletException;
@@ -12,6 +14,8 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.FlashMap;
 import org.springframework.web.servlet.support.SessionFlashMapManager;
+
+import com.grupal.inmobilaria.entities.Usuario;
 
 @Component
 public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
@@ -29,6 +33,8 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 			logger.info("El usuario " + authentication.getName() 
 			+ " ha iniciado sesión con éxito " + Calendar.getInstance().get(Calendar.SHORT_FORMAT));
 		}		
+		
+		
 		super.onAuthenticationSuccess(request, response, authentication);
 	}
 }
