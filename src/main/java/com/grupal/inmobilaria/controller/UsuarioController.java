@@ -53,7 +53,7 @@ public class UsuarioController {
 			if(result.hasErrors())
 			{	
 				model.addAttribute("title", "Registro de nuevo usuario");
-				model.addAttribute("usuario", usuario);
+				model.addAttribute("error", "Error al registrar");
 				return "usuario/form";
 			}			
 			String pass = usuario.getPassword();

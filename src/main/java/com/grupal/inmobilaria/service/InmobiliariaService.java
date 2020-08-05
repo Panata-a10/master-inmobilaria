@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.grupal.inmobilaria.dao.IInmobilaria;
 import com.grupal.inmobilaria.entities.Inmobilaria;
 
+
 @Service
 public class InmobiliariaService implements IInmobilariaService {
 	@Autowired  //inyeccion de dependencia
@@ -40,6 +41,20 @@ public class InmobiliariaService implements IInmobilariaService {
 		
 		return (List<Inmobilaria>)dao.findAll();
 	}
+
+	@Override
+	@Transactional
+	public List<Inmobilaria> findUsuario(Integer id) {
+
+		return (List<Inmobilaria>)dao.findByUsuario(id);
+	
+	}
+
+	
+	
+
+	
+	
 
 
 }

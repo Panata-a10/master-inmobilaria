@@ -4,9 +4,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,7 +19,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -23,9 +29,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.grupal.inmobilaria.entities.Inmobilaria;
 import com.grupal.inmobilaria.entities.Operacion;
 import com.grupal.inmobilaria.entities.TipoInmobilaria;
+import com.grupal.inmobilaria.entities.Usuario;
 import com.grupal.inmobilaria.service.IInmobilariaService;
 import com.grupal.inmobilaria.service.IOperacionService;
 import com.grupal.inmobilaria.service.ITipoInmobilariaService;
+import com.grupal.inmobilaria.service.UsuarioService;
 
 @Controller 
 @RequestMapping(value = "/inmobilaria")
@@ -41,6 +49,10 @@ public class InmobilariaController {
 
 	@Autowired 
 	private IOperacionService  srvOperacion;
+	
+
+	@Autowired 
+	private UsuarioService  srvUsuario;
 	
 	//Cada metodo en el controlador gestionaun peticion al backend
 	//a travez de una URL(puede ser escrita en el navegador)
@@ -101,7 +113,21 @@ public class InmobilariaController {
 	
 	@GetMapping(value = "/list")
 	public String list(Model model) {
-		List<Inmobilaria> inmobilarias = srvInmobilaria.findAll();
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		
+		String nombre;
+		if (principal instanceof UserDetails) {
+			nombre = ((UserDetails)principal).getUsername();
+		} else {
+		   nombre = principal.toString();
+		}
+		
+		Usuario usuario = srvUsuario.findByNombre(nombre);
+		
+		
+		List<Inmobilaria> inmobilarias = srvInmobilaria.findUsuario(usuario.getIdusuario());
 		model.addAttribute("inmobilarias", inmobilarias);
 		model.addAttribute("title", "Listado de inmobilarias");
 		return ("inmobilaria/list");
@@ -145,6 +171,18 @@ public class InmobilariaController {
 					e.printStackTrace();
 				}
 			}//fin
+		
+			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+			String nombre;
+			if (principal instanceof UserDetails) {
+				nombre = ((UserDetails)principal).getUsername();
+			} else {
+			   nombre = principal.toString();
+			}
+			
+			Usuario usuario = srvUsuario.findByNombre( nombre);
+			inmobilaria.setAnunciante(usuario);
 			srvInmobilaria.save(inmobilaria);
 			status.setComplete();
 			flash.addFlashAttribute("success", message);
@@ -168,6 +206,12 @@ public class InmobilariaController {
 		return ("inmobilaria/listall");
 	}
 
+	
+	@RequestMapping(value = "/myusername", method = RequestMethod.GET)
+	@ResponseBody
+	public String currentUserName(Principal principal) {
+	    return principal.getName();
+	}
 
 
 }

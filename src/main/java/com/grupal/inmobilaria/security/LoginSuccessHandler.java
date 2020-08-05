@@ -1,7 +1,6 @@
 package com.grupal.inmobilaria.security;
 
 import java.io.IOException;
-import org.springframework.security.core.userdetails.User;
 
 import java.util.Calendar;
 
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.FlashMap;
 import org.springframework.web.servlet.support.SessionFlashMapManager;
 
-import com.grupal.inmobilaria.entities.Usuario;
 
 @Component
 public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
