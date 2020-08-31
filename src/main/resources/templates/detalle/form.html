@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+	
+
+	<form id="frmDetalle" 
+	class="contact-form-area ml-3 mr-3" 
+	th:object="${detalle}" th:action="@{/inmobiliaria/add}" method="post">		
+		
+		<div class="row d-flex align-items-center">
+			<div class="col-1">
+				<i class="fas fa-home"></i>
+			</div>
+			<div class="col-2">
+				<small>Descripci&oacute;n:</small>
+			</div>
+			<div class="col-9">
+				<input type="text" th:field="*{descripcion}" class="form-control"
+					placeholder="Descripci&oacute;n"  required />
+			</div>
+		</div>
+		<div class="row d-flex align-items-center">
+			<div class="col-1">
+				<i class="fab fa-buffer"></i>
+			</div>
+			<div class="col-2">
+				<small>Cantidad:</small>
+			</div>
+			<div class="col-9">
+				<input type="number" th:field="*{cantidad}" class="form-control"
+					placeholder="Cantidad"  min=0  required />
+			</div>
+		</div>
+		
+		<div class="row d-flex align-items-center">
+			<div class="col-1">
+				<i class="fas fa-ruler"></i>
+			</div>
+			<div class="col-2">
+				<small>Tama&ntilde;o m<sup>2</sup>:</small>
+			</div>
+			<div class="col-9">
+				<input type="number" th:field="*{tamano}" class="form-control"
+					placeholder="Tama&ntilde;o"  min=0  required />
+			</div>
+		</div>
+	</form>
+
+</body>
+</html>

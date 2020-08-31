@@ -1,6 +1,7 @@
 package com.grupal.inmobilaria.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Basic;
@@ -16,6 +17,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="inmobilarias")
@@ -82,6 +85,13 @@ public class Inmobilaria implements Serializable  {
 	
 	@OneToMany(mappedBy="inmobilaria" , fetch = FetchType.LAZY )
 	private List<Movimiento> movimiento;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="inmobilaria", fetch=FetchType.LAZY) 
+	private List<Detalle> detalles;
+
+	
+	
 
 	public Inmobilaria() {
 		super();
@@ -90,6 +100,22 @@ public class Inmobilaria implements Serializable  {
 	public Inmobilaria(Integer id) {
 		super();
 		this.idInmobilaria =id;
+	}
+
+	
+	
+	
+	public List<Detalle> getDetalles() {
+		
+		if(detalles == null) {
+			detalles = new ArrayList<Detalle>();
+		}
+					
+		return detalles;
+	}
+
+	public void setDetalles(List<Detalle> detalles) {
+		this.detalles = detalles;
 	}
 
 	

@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<head th:replace="layout2 :: frgHead">
-</head>
+
+<head th:replace="layout2 :: frgHead"></head>
 
 <body id="page-top">
 
@@ -21,171 +20,194 @@
 
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
-				<div class="text-center">
-					<h1 th:text="${title}" class="h4 text-gray-900 mb-4"></h1>
-				</div>
-				
-						<form class="user" 
-							th:action="@{/inmobilaria/save}" th:object="${inmobilaria}" 
-							enctype="multipart/form-data" method="post">
-							<hr>
-							<h6>DATOS GENERALES:</h6>
-							<div class="form-group row">
-								<div class="col-sm-4 mb-3 mb-sm-0">
-									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<span class="input-group-text"><i
-												class="fas fa-building"></i></span>
-										</div>
-										<input type="text" class="form-control"
-											th:errorclass="'form-control is-invalid'"
-											th:field="*{nombre}" placeholder="Nombre" />
-											<small class="invalid-feedback"
-										th:if="${#fields.hasErrors('nombre')}"
-										th:errors="*{nombre}"></small>
+					<div class="text-center">
+						<h1 th:text="${title}" class="h4 text-gray-900 mb-4"></h1>
+					</div>
+
+					<form class="user" th:action="@{/inmobilaria/save}"
+						th:object="${inmobilaria}" enctype="multipart/form-data"
+						method="post">
+						<hr>
+						<h6>DATOS GENERALES:</h6>
+						<div class="form-group row">
+							<div class="col-sm-4 mb-3 mb-sm-0">
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i
+											class="fas fa-building"></i></span>
 									</div>
+									<input type="text" class="form-control"
+										th:errorclass="'form-control is-invalid'" th:field="*{nombre}"
+										placeholder="Nombre" /> <small class="invalid-feedback"
+										th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
 								</div>
-								<div class="col-sm-4 mb-3 mb-sm-0">
-									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<span class="input-group-text"><i
-												class="fas fa-map"></i></span>
-										</div>
-										<input type="text" class="form-control"
-											th:errorclass="'form-control is-invalid'"
-											th:field="*{provincia}" placeholder="Provincia" />
-											<small class="invalid-feedback"
+							</div>
+							<div class="col-sm-4 mb-3 mb-sm-0">
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i class="fas fa-map"></i></span>
+									</div>
+									<input type="text" class="form-control"
+										th:errorclass="'form-control is-invalid'"
+										th:field="*{provincia}" placeholder="Provincia" /> <small
+										class="invalid-feedback"
 										th:if="${#fields.hasErrors('provincia')}"
 										th:errors="*{provincia}"></small>
-									</div>
 								</div>
-								<div class="col-sm-4 mb-3 mb-sm-0">
-									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<span class="input-group-text"><i
-												class="fas fa-map-marked-alt"></i></span>
-										</div>
-										<input type="text" class="form-control"
-											th:field="*{direccion}"
-											th:errorclass="'form-control is-invalid'"
-											placeholder="Direccion">
-											<small class="invalid-feedback"
+							</div>
+							<div class="col-sm-4 mb-3 mb-sm-0">
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i
+											class="fas fa-map-marked-alt"></i></span>
+									</div>
+									<input type="text" class="form-control" th:field="*{direccion}"
+										th:errorclass="'form-control is-invalid'"
+										placeholder="Direccion"> <small
+										class="invalid-feedback"
 										th:if="${#fields.hasErrors('direccion')}"
 										th:errors="*{direccion}"></small>
-									</div>														
-								</div>	
-								<div class="col-sm-4 mb-3 mb-sm-0">
-									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<span class="input-group-text"><i
-												class="fab fa-elementor"></i></span>
-										</div>
-										<input type="number" class="form-control"
-											th:field="*{habitaciones}"
-											th:errorclass="'form-control is-invalid'"
-											placeholder="Num° Habitaciones">
-											<small class="invalid-feedback"
+								</div>
+							</div>
+							<div class="col-sm-4 mb-3 mb-sm-0">
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i
+											class="fab fa-elementor"></i></span>
+									</div>
+									<input type="number" class="form-control"
+										th:field="*{habitaciones}"
+										th:errorclass="'form-control is-invalid'"
+										placeholder="Num° Habitaciones"> <small
+										class="invalid-feedback"
 										th:if="${#fields.hasErrors('habitaciones')}"
 										th:errors="*{habitaciones}"></small>
-									</div>														
 								</div>
-								<div class="col-sm-4 mb-3 mb-sm-0">
-									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<span class="input-group-text"><i
-												class="fas fa-bell"></i></span>
-										</div>
-										<input type="text" class="form-control"
-											th:field="*{descripcion}"
-											th:errorclass="'form-control is-invalid'"
-											placeholder="Descripcion">
-											<small class="invalid-feedback"
+							</div>
+							<div class="col-sm-4 mb-3 mb-sm-0">
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i class="fas fa-bell"></i></span>
+									</div>
+									<input type="text" class="form-control"
+										th:field="*{descripcion}"
+										th:errorclass="'form-control is-invalid'"
+										placeholder="Descripcion"> <small
+										class="invalid-feedback"
 										th:if="${#fields.hasErrors('descripcion')}"
 										th:errors="*{descripcion}"></small>
-									</div>														
 								</div>
-								<div class="col-sm-4 mb-3 mb-sm-0">
-									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
-										</div>
-										<input type="text" class="form-control"
-											th:field="*{valor}"
-											th:errorclass="'form-control is-invalid'"
-											placeholder="Valor">
-											<small class="invalid-feedback"
-										th:if="${#fields.hasErrors('valor')}"
-										th:errors="*{valor}"></small>
-									</div>														
-								</div>	
-								
-								<div class="col-sm-4 mb-3 mb-sm-0">
-									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<span class="input-group-text"><i class="fas fa-pencil-ruler"></i></span>
-										</div>
-										<input type="text" class="form-control"
-											th:field="*{area_construccion}"
-											th:errorclass="'form-control is-invalid'"
-											placeholder="Area construccion en m2">
-											<small class="invalid-feedback"
+							</div>
+							<div class="col-sm-4 mb-3 mb-sm-0">
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i
+											class="fas fa-dollar-sign"></i></span>
+									</div>
+									<input type="text" class="form-control" th:field="*{valor}"
+										th:errorclass="'form-control is-invalid'" placeholder="Valor">
+									<small class="invalid-feedback"
+										th:if="${#fields.hasErrors('valor')}" th:errors="*{valor}"></small>
+								</div>
+							</div>
+
+							<div class="col-sm-4 mb-3 mb-sm-0">
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i
+											class="fas fa-pencil-ruler"></i></span>
+									</div>
+									<input type="text" class="form-control"
+										th:field="*{area_construccion}"
+										th:errorclass="'form-control is-invalid'"
+										placeholder="Area construccion en m2"> <small
+										class="invalid-feedback"
 										th:if="${#fields.hasErrors('area_construccion')}"
 										th:errors="*{area_construccion}"></small>
-									</div>														
-								</div>												
-							</div>
-							<div class="form-group row">
-								<!-- RELACIONES -->							
-								<!-- Tipo Inmobiliaria-->
-								<h6>Tipo Inmobiliaria</h6>
-								<div class="col-sm-4 mb-3 mb-sm-0">	
-									<select class="form-control" th:field=*{tipoImnobilaria.idTipInmobilaria}>
-										<option value =0>-- Seleccione --</option>
-										<option th:each="tp : ${tipo_inmobilarias}" 
-											th:value="${tp.idTipInmobilaria}" 
-											th:text="${tp.descripcion}">
-										</option> 
-									</select>
-								</div>
-								<!-- Operacion -->
-								<h6>Operacion</h6>
-								<div class="col-sm-4 mb-3 mb-sm-0">	
-									<select class="form-control" th:field=*{operacion.idOperacion}>
-										<option value =0>-- Seleccione --</option>
-										<option th:each="o : ${operaciones}" 
-											th:value="${o.idOperacion}" 
-											th:text="${o.descripcion}">
-										</option> 
-									</select>
 								</div>
 							</div>
-							<div class="form-group row">
-								<h6>Imagen</h6>
-								<div class="col-5">													
-									<input type="file" name="photo" id="photo" class="form-control" />
-								</div>
+						</div>
+						<div class="form-group row">
+							<!-- RELACIONES -->
+							<!-- Tipo Inmobiliaria-->
+							<h6>Tipo Inmobiliaria</h6>
+							<div class="col-sm-4 mb-3 mb-sm-0">
+								<select class="form-control"
+									th:field=*{tipoImnobilaria.idTipInmobilaria}>
+									<option value=0>-- Seleccione --</option>
+									<option th:each="tp : ${tipo_inmobilarias}"
+										th:value="${tp.idTipInmobilaria}" th:text="${tp.descripcion}">
+									</option>
+								</select>
 							</div>
-							<div class="form-group row">
-								<div class="col-sm-6 mb-3 mb-sm-0">
-									<input type="submit"
-										class="btn btn-success btn-user btn-block"
-										value="Guardar"/>
-								</div>
-								<div class="col-sm-6 mb-3 mb-sm-0">
-									<a th:href="@{/inmobilaria/list}"
-										class="btn btn-danger btn-user btn-block">Cancelar</a>
-								</div>
+							<!-- Operacion -->
+							<h6>Operacion</h6>
+							<div class="col-sm-4 mb-3 mb-sm-0">
+								<select class="form-control" th:field=*{operacion.idOperacion}>
+									<option value=0>-- Seleccione --</option>
+									<option th:each="o : ${operaciones}"
+										th:value="${o.idOperacion}" th:text="${o.descripcion}">
+									</option>
+								</select>
 							</div>
+						</div>
+						<div class="form-group row">
+							<h6>Imagen</h6>
+							<div class="col-5">
+								<input type="file" name="photo" id="photo" class="form-control" />
+							</div>
+							<!-- Button trigger modal -->
+
+
+						</div>
+
+						<!-- Button trigger modal -->
+						
+
+
+
+
+
+				<div class="row">
+							<div class="col-10">
+								<h4>Detalles inmueble</h4>
+							</div>
+							<div class="col-2">
+								<button type="button" class="btn btn-success" id="btnAdd" data-toggle="modal"
+							data-target="#exampleModal"><i class="fas fa-plus-circle"></i>&nbsp;Nuevo</button>
 							
-							<input type="hidden" th:field="*{idInmobilaria}" />
-
-						</form>
+							</div>
+						</div>
+						<div id="listDetalles"></div>
 
 					
+
+
+
+
+
+						<div class="form-group row">
+							<div class="col-sm-6 mb-3 mb-sm-0">
+								<input type="submit" class="btn btn-success btn-user "
+									value="Guardar" />
+									<a th:href="@{/inmobilaria/list}"
+									class="btn btn-danger btn-user">Cancelar</a>
+							</div>
+							<div class="col-sm-6 mb-3 mb-sm-0">
+								
+							</div>
+						</div>
+
+						<input type="hidden" th:field="*{idInmobilaria}" />
+
+					</form>
+						
 					
+
+
+
 					<!-- Content Row -->
-					<div class="row">
-					</div>
+					<div class="row"></div>
 					<!-- /.container-fluid -->
 
 				</div>
@@ -197,12 +219,37 @@
 
 			</div>
 			<!-- End of Content Wrapper -->
+			<!-- Modal -->
+			<div class="modal fade" id="exampleModal" tabindex="-1"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title " id="exampleModalLabel">Detalles del
+								inmueble</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body" id="contentFrmDetalle"></div>
+						<div class="modal-footer">
+							<button id="btnSubmit" type="button" class="btn btn-success btn-user" data-dismiss="modal">Guardar</button>
+							<button type="button" class="btn btn-danger btn-user "
+								data-dismiss="modal">Cancelar</button>
 
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		<!-- End of Page Wrapper -->
 	</div>
 
 	<!-- Bootstrap core JavaScript-->
+	
+	<script th:src="@{/js/inmobilaria/addDetails.js}"></script>
+	
 	<script th:src="@{/admin/vendor/jquery/jquery.min.js}"></script>
 	<script th:src="@{/admin/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 

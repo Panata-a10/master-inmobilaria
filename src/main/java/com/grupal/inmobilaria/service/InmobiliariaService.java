@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.grupal.inmobilaria.dao.IDetalle;
 import com.grupal.inmobilaria.dao.IInmobilaria;
+import com.grupal.inmobilaria.entities.Detalle;
 import com.grupal.inmobilaria.entities.Inmobilaria;
 
 
@@ -15,10 +17,22 @@ public class InmobiliariaService implements IInmobilariaService {
 	@Autowired  //inyeccion de dependencia
 	private IInmobilaria dao;
 	
+	@Autowired  //inyeccion de dependencia
+	private IDetalle daoDetalle;
+	
 	@Override
 	@Transactional
 	public void save(Inmobilaria a) {
-		dao.save(a);
+		try {
+			dao.save(a);
+			for(Detalle d: a.getDetalles()) {
+				d.setInmobilaria(a);
+				this.daoDetalle.save(d);
+			}
+		}catch(Exception ex)
+		{	System.out.print(ex.getMessage());
+			throw ex;}
+		
 	}
 
 	@Override

@@ -40,6 +40,7 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 						<thead>
 							<tr>
+								
 								<th>Nombre</th>
 								<th>Provincia</th>
 								<th>Direccion</th>
@@ -54,6 +55,7 @@
 						</thead>
 						<tbody>
 							<tr th:each="i : ${inmobilarias}">
+								
 								<td th:text="${i.nombre}"></td>
 								<td th:text="${i.provincia}"></td>
 								<td th:text="${i.direccion}"></td>

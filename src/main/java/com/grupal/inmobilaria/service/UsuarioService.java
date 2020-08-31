@@ -72,4 +72,11 @@ public class UsuarioService  implements UserDetailsService  {
 		
 		return (List<Usuario>) dao.findByRoles(nombre);
 	}
+	
+	
+	@Transactional
+	public Rol findRol (Integer id) {
+		
+		return  dao.FindRol(id);
+	}
 }
