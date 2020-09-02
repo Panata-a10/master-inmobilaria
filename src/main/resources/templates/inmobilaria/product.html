@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link th:href="@{/css/product.css}" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+
+
+	<section class="product">
+		<div class="product__photo">
+			<div class="photo-container">
+				<div class="photo-main">
+
+					<img th:src="@{/inmuebles/} + ${inmobilaria.imagen}" width="700"
+						height="400" alt="Inmueble sin imagen">
+				</div>
+
+			</div>
+		</div>
+		<div class="product__info">
+			<div class="title">
+				<h1 th:text="${inmobilaria.nombre}"></h1>
+				<span
+					th:text="${inmobilaria.direccion} +',&nbsp;'+ ${inmobilaria.provincia}"></span>
+			</div>
+			<div class="price">
+				$ <span th:text="${inmobilaria.valor}">USD</span>
+			</div>
+
+			<div class="description">
+				<h3>Detalles</h3>
+				<ul>
+					<li
+						th:text="'Tiene&nbsp;'+${inmobilaria.habitaciones} + '&nbsp;habitacion/es'">
+					</li>
+				</ul>
+				<ul>
+					<li th:text="'Esta en&nbsp;'+${inmobilaria.operacion.descripcion} "></li>
+				</ul>
+				<ul>
+					<li
+						th:text="'De tipo&nbsp;'+${inmobilaria.tipoImnobilaria.descripcion} "></li>
+				</ul>
+				<ul>
+					<li
+						th:text="'Area de construccion&nbsp;'+${inmobilaria.area_construccion}+'&nbsp;m2' "></li>
+				</ul>
+				<ul th:each="i : ${detalles}">
+					<li
+						th:text="${i.cantidad}+'&nbsp;'+${i.descripcion} +'(s)&nbsp;de&nbsp;'+${i.tamano}+'&nbsp;m2'"></li>
+				</ul>
+			</div>
+			
+			<a class="buy--btn" 
+									th:href="@{/inmobilaria/movimiento/} + ${inmobilaria.idInmobilaria} "> <i class="fa fa-edit">&nbsp;Preguntar</i></a>
+			<a class="volver--btn"
+									th:href="@{/inmobilaria/listall/} "> <i class="fa fa-edit">&nbsp;Volver</i></a>
+			
+			
+		</div>
+	</section>
+​
+</body>
+</html>

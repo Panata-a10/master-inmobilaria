@@ -59,7 +59,9 @@
 													<p class="precio" th:text="${i.valor}"></p>
 													<p th:text="${i.descripcion}"></p>
 													<p>
-														<button>Pregunntar</button>
+														<a class="btn btn-sm btn-info"
+									th:href="@{/inmobilaria/product/} + ${i.idInmobilaria}"> <i class="fas fa-info-circle"></i>&nbsp;Informaci&oacute;n</a>
+								
 													</p>
 												</div>											</td>
 											<!--  

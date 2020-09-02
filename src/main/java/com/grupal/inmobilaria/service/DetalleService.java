@@ -40,6 +40,13 @@ public class DetalleService implements IDetalleService {
 	public List<Detalle> findAll(){
 		return (List<Detalle>) dao.findAll();
 	}
+
+	@Override
+	@Transactional 
+	public List<Detalle> findByInmobilaria(Integer id) {
+		// TODO Auto-generated method stub
+		return (List<Detalle>) dao.findByInmobilaria(id);
+	}
 	
 	
 

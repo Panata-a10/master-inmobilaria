@@ -32,8 +32,10 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.grupal.inmobilaria.dao.IMovimiento;
 import com.grupal.inmobilaria.entities.Detalle;
 import com.grupal.inmobilaria.entities.Inmobilaria;
+import com.grupal.inmobilaria.entities.Movimiento;
 import com.grupal.inmobilaria.entities.Operacion;
 import com.grupal.inmobilaria.entities.Rol;
 import com.grupal.inmobilaria.entities.TipoInmobilaria;
@@ -69,6 +71,9 @@ public class InmobilariaController {
 	
 	@Autowired
 	private IDetalleService srvDetalle;
+	
+	@Autowired
+	private IMovimiento srvMovimiento;
 	
 	
 	//Cada metodo en el controlador gestionaun peticion al backend
@@ -257,9 +262,40 @@ public class InmobilariaController {
 		//model.addAttribute("title", "Listado de los detalles");
 		return "detalle/list";
 	}
+	
+	@GetMapping(value = "/movimiento/{id}")
+	public String movimiento( @PathVariable(value="id")Integer id, Model model, RedirectAttributes flash) {
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		
+		String nombre;
+		if (principal instanceof UserDetails) {
+			nombre = ((UserDetails)principal).getUsername();
+		} else {
+		   nombre = principal.toString();
+		}
+		
+		Usuario usuario = srvUsuario.findByNombre(nombre);
+		
+		Inmobilaria inmobilaria = srvInmobilaria.findById(id);
+		
+		Movimiento mov = new Movimiento();
+		mov.setInmobilaria(inmobilaria);
+		mov.setCliente(usuario);
+		
+		flash.addFlashAttribute("success", "El anunciante le enviara un mensaje a su email" );
+		srvMovimiento.save(mov);
+		
+		return "redirect:/inmobilaria/listall";
+	}
+	
+	
+	
+	
 
 	
-	/* =================Vista de todos los inmuebles ====================================*/
+	/* =================Vista de todos los inmuebles Cliente====================================*/
 	
 	@GetMapping(value = "/listall")
 	public String listall(Model model) {
@@ -268,6 +304,24 @@ public class InmobilariaController {
 		model.addAttribute("title", "Listado de inmobilarias");
 		return ("inmobilaria/listall");
 	}
+	
+	
+	@GetMapping(value = "/product/{id}")
+	public String productCard( @PathVariable(value="id")Integer id, Model model) {
+		
+		Inmobilaria inmobilaria = srvInmobilaria.findById(id);
+		List<Detalle> detalles = srvDetalle.findByInmobilaria(inmobilaria.getIdInmobilaria());
+		if(detalles != null)
+			model.addAttribute("detalles", detalles);
+		
+		model.addAttribute("inmobilaria", inmobilaria);	
+		model.addAttribute("title", inmobilaria.getNombre());
+		return "inmobilaria/product";
+	}
+	
+	
+	
+	
 
 	
 	
