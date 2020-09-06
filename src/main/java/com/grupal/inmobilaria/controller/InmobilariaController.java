@@ -48,6 +48,7 @@ import com.grupal.inmobilaria.service.UsuarioService;
 
 
 
+
 @Controller 
 @SessionAttributes("inmobilaria")
 @RequestMapping(value = "/inmobilaria")
@@ -291,7 +292,104 @@ public class InmobilariaController {
 	}
 	
 	
+	@GetMapping(value = "/ofertas")
+	public String ofertas(Model model) {
+		
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		
+		String nombre;
+		if (principal instanceof UserDetails) {
+			nombre = ((UserDetails)principal).getUsername();
+		} else {
+		   nombre = principal.toString();
+		}
+		
+		Usuario usuario = srvUsuario.findByNombre(nombre);
+		
+		
+		List<Inmobilaria> inmobilarias = srvInmobilaria.findUsuario(usuario.getIdusuario());
+		List<Movimiento> movimientos = new ArrayList<Movimiento>();
+		for(int i = 0; i<inmobilarias.size() ; i++) {
+			List<Movimiento> movFilters = srvMovimiento.findByInmobilaria(inmobilarias.get(i).getIdInmobilaria());
+			if(movFilters != null) {
+				movimientos.addAll(movFilters) ;
+				
+			}
+		}
+		
+		model.addAttribute("movimientos", movimientos);
+		model.addAttribute("title", "Listado de Ofertas");
+		return ("inmobilaria/ofertas");
+	}
+
 	
+	@GetMapping(value = "/todasInmobilarias")
+	public @ResponseBody List<String> todasInmobilarias(Model model){
+		
+		try {
+			
+			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+			String nombre;
+			if (principal instanceof UserDetails) {
+				nombre = ((UserDetails)principal).getUsername();
+			} else {
+			   nombre = principal.toString();
+			}
+			
+			Usuario usuario = srvUsuario.findByNombre(nombre);			
+			List<Inmobilaria> inmobilarias = srvInmobilaria.findUsuario(usuario.getIdusuario());
+			List<String> inmueble = new ArrayList<String>();
+			for(int i=0; i< inmobilarias.size();i++ ) {
+				inmueble.add(inmobilarias.get(i).getNombre());
+			}
+			
+			return inmueble;
+ 		}catch(Exception ex){
+ 			System.out.println(ex.getMessage());
+ 			return null;
+		}
+		
+		
+	}
+	
+	 
+	@GetMapping(value = "/CantidadOfertas", produces="application/json")
+	public @ResponseBody List<Integer> CantidadMatriculas(Model model){
+		try {
+			
+			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+			String nombre;
+			if (principal instanceof UserDetails) {
+				nombre = ((UserDetails)principal).getUsername();
+			} else {
+			   nombre = principal.toString();
+			}
+			
+			Usuario usuario = srvUsuario.findByNombre(nombre);			
+			List<Inmobilaria> inmobilarias = srvInmobilaria.findUsuario(usuario.getIdusuario());
+			List<Integer> cantidad = new ArrayList<Integer>() ;
+			
+			for(int i=0;i<inmobilarias.size(); i++) {				
+				cantidad.add(srvMovimiento.findByInmobilaria(inmobilarias.get(i).getIdInmobilaria()).size());
+			}
+			
+			return cantidad;
+		}catch(Exception ex){
+			System.out.print(ex.getLocalizedMessage());
+			return null;
+		}
+		
+	}
+	
+	
+	
+	@GetMapping(value = "/rptOfertas")
+	public String rptOfertas(Model model) {
+		return "inmobilaria/rptOfertas";				
+	}
 	
 
 	
