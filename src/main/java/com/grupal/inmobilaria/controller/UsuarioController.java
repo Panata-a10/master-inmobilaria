@@ -185,10 +185,6 @@ public class UsuarioController {
 		return "usuario/listanun";
 	}
 	
-	
-	
-
-
 	@GetMapping(value = "/retrieveAnun/{id}")
 	public String retrieveAnun( @PathVariable(value="id")Integer id, Model model) {
 		
@@ -213,9 +209,6 @@ public class UsuarioController {
 		service.delete(id);
 		return "redirect:/usuario/listanun";
 	}
-	
-	
-	
 	
 	@PostMapping(value="/saveAnun")
 	public String saveAnun(@Validated Usuario usuario, BindingResult result, Model model,

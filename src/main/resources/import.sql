@@ -3,7 +3,6 @@ INSERT INTO movimientos (pk_movimimento, recomendacion) VALUES(1, 20);
 INSERT INTO operaciones (pk_operacion, descripcion) VALUES(1, 'Venta');
 INSERT INTO operaciones (pk_operacion, descripcion) VALUES(2, 'Renta');
 
-
 INSERT INTO pagos (pk_pago, descripcion) VALUES(1, 'Transacion');
 INSERT INTO pagos (pk_pago, descripcion) VALUES(2, 'Cambio');
 INSERT INTO pagos (pk_pago, descripcion) VALUES(3, 'Cheque');
@@ -14,5 +13,5 @@ INSERT INTO tipo_inmobilarias (pk_tip_inmobilaria, descripcion) VALUES(3, 'Depar
 INSERT INTO tipo_inmobilarias (pk_tip_inmobilaria, descripcion) VALUES(4, 'Terreno');
 INSERT INTO tipo_inmobilarias (pk_tip_inmobilaria, descripcion) VALUES(5, 'Inmueble');
 
-
+INSERT INTO empresas (pk_empresa, direccion, nombre, telefono) VALUES(1, 'Ambato-Ficoa', 'Pintulac', '032822550');
 

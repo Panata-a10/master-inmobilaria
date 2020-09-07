@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -40,6 +39,7 @@ import com.grupal.inmobilaria.entities.Operacion;
 import com.grupal.inmobilaria.entities.Rol;
 import com.grupal.inmobilaria.entities.TipoInmobilaria;
 import com.grupal.inmobilaria.entities.Usuario;
+import com.grupal.inmobilaria.reporting.RptUsuarioInmuebles;
 import com.grupal.inmobilaria.service.IDetalleService;
 import com.grupal.inmobilaria.service.IInmobilariaService;
 import com.grupal.inmobilaria.service.IOperacionService;
@@ -453,6 +453,21 @@ public class InmobilariaController {
 		return ("inmobilaria/listall");
 	}
 
+	
+	/*========================REPORTE TOMAS =========*/
+	@GetMapping(value = "/rptUsuarioInmuebles")
+	public String rptUsuariosInmueble(Model model) {
+		return "inmobilaria/rptUsuarioInmuebles";				
+	}
 
+	@GetMapping(value = "/dataRptUsuarioInmuebles", produces="application/json")
+	public @ResponseBody List<RptUsuarioInmuebles> dataRptMatriculadosMateria(Model model) {				
+		try {			
+			return this.srvInmobilaria.rptUsuarioInmuebles();
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+			return null;
+		}		
+	}
 
 }

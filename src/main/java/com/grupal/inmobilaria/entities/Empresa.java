@@ -101,9 +101,4 @@ public class Empresa implements Serializable {
 	public void setUsuario(List<Usuario> usuario) {
 		this.usuario = usuario;
 	}
-	
-	
-	
-	
-	
 }

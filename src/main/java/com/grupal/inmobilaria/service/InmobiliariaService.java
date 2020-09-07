@@ -1,6 +1,11 @@
 package com.grupal.inmobilaria.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.StoredProcedureQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +15,7 @@ import com.grupal.inmobilaria.dao.IDetalle;
 import com.grupal.inmobilaria.dao.IInmobilaria;
 import com.grupal.inmobilaria.entities.Detalle;
 import com.grupal.inmobilaria.entities.Inmobilaria;
+import com.grupal.inmobilaria.reporting.RptUsuarioInmuebles;
 
 
 @Service
@@ -38,7 +44,6 @@ public class InmobiliariaService implements IInmobilariaService {
 	@Override
 	@Transactional
 	public Inmobilaria findById(Integer id) {
-		
 		return dao.findById(id).get();
 	}
 
@@ -46,29 +51,32 @@ public class InmobiliariaService implements IInmobilariaService {
 	@Transactional
 	public void delete(Integer id) {
 		dao.deleteById(id);
-		
 	}
  
 	@Override
 	@Transactional
 	public List<Inmobilaria> findAll() {
-		
 		return (List<Inmobilaria>)dao.findAll();
 	}
 
 	@Override
 	@Transactional
 	public List<Inmobilaria> findUsuario(Integer id) {
-
 		return (List<Inmobilaria>)dao.findByUsuario(id);
-	
 	}
 
+	//-------------------DESDE AQUI REPORTE TOMAS-----------------------------//
+	@PersistenceContext
+	private EntityManager em;
 	
-	
-
-	
-	
-
+	@Override
+	public List<RptUsuarioInmuebles> rptUsuarioInmuebles() {		
+		StoredProcedureQuery query = em.createStoredProcedureQuery("inmuebleusuario");
+		query.execute();
+		List<Object[]> datos = query.getResultList();		
+		return datos.stream()
+				.map(r -> new RptUsuarioInmuebles((String)r[0], (String)r[1]))
+				.collect(Collectors.toList());		
+	}
 
 }

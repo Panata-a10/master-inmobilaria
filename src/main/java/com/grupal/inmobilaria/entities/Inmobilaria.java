@@ -1,6 +1,7 @@
 package com.grupal.inmobilaria.entities;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,9 +15,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -90,9 +96,6 @@ public class Inmobilaria implements Serializable  {
 	@OneToMany(mappedBy="inmobilaria", fetch=FetchType.LAZY) 
 	private List<Detalle> detalles;
 
-	
-	
-
 	public Inmobilaria() {
 		super();
 	}
@@ -102,9 +105,6 @@ public class Inmobilaria implements Serializable  {
 		this.idInmobilaria =id;
 	}
 
-	
-	
-	
 	public List<Detalle> getDetalles() {
 		
 		if(detalles == null) {
@@ -117,8 +117,6 @@ public class Inmobilaria implements Serializable  {
 	public void setDetalles(List<Detalle> detalles) {
 		this.detalles = detalles;
 	}
-
-	
 
 	public Integer getIdInmobilaria() {
 		return idInmobilaria;
@@ -233,4 +231,63 @@ public class Inmobilaria implements Serializable  {
 		this.imagen = imagen;
 	}
 	
+	//------------------DESDE AQUI REPORTE TOMAS-------------------------------//
+	
+	@Column(name = "creado_en")
+	private LocalDateTime creadoEn;
+
+	@Column(name = "creado_por")
+	private String creadoPor;
+
+	@Column(name = "modificado_en")
+	private LocalDateTime modificadoEn;
+
+	@Column(name = "modificado_por")
+	private String modificadoPor;
+	
+	public LocalDateTime getCreadoEn() {
+		return creadoEn;
+	}
+
+	public void setCreadoEn(LocalDateTime creadoEn) {
+		this.creadoEn = creadoEn;
+	}
+
+	public String getCreadoPor() {
+		return creadoPor;
+	}
+
+	public void setCreadoPor(String creadoPor) {
+		this.creadoPor = creadoPor;
+	}
+
+	public LocalDateTime getModificadoEn() {
+		return modificadoEn;
+	}
+
+	public void setModificadoEn(LocalDateTime modificadoEn) {
+		this.modificadoEn = modificadoEn;
+	}
+
+	public String getModificadoPor() {
+		return modificadoPor;
+	}
+
+	public void setModificadoPor(String modificadoPor) {
+		this.modificadoPor = modificadoPor;
+	}
+	
+	@PrePersist
+	public void prePersist() {
+		creadoEn = LocalDateTime.now();
+		SecurityContext context = SecurityContextHolder.getContext();
+        creadoPor = context.getAuthentication().getName();
+	}
+
+	@PreUpdate
+	public void preUpdate() {
+		modificadoEn = LocalDateTime.now();
+		SecurityContext context = SecurityContextHolder.getContext();
+        modificadoPor = context.getAuthentication().getName();
+	}
 }

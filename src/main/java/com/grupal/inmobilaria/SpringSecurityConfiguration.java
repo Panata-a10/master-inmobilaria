@@ -38,7 +38,7 @@ public class SpringSecurityConfiguration  extends WebSecurityConfigurerAdapter{
 			.antMatchers("/","/admin/css/**","/admin/img/**","/admin/js/**","/admin/scss/**","/admin/vendor/**","/assets/**","/css/**","/js/**").permitAll()
 			.antMatchers("/usuario/create","/usuario/save").anonymous()
 			.antMatchers("/inmobilaria/vista","/usuario/**","/empresa/**").hasAnyRole("ADMIN")
-			.antMatchers("/detalle/**"   ,"/inmobilaria/rptOfertas","/inmobilaria/ofertas","/inmobilaria/list","/inmobilaria/create","/inmobilaria/save","/inmobilaria/update/**","/inmobilaria/delete/**").hasAnyRole("ANUN")
+			.antMatchers("/detalle/**"   ,"/inmobilaria/rptOfertas","/inmobilaria/rptUsuarioInmuebles","/inmobilaria/ofertas","/inmobilaria/Inmuebles","/inmobilaria/list","/inmobilaria/create","/inmobilaria/save","/inmobilaria/update/**","/inmobilaria/delete/**").hasAnyRole("ANUN")
 			.antMatchers("/inmobilaria/vista","/inmobilaria/listall").hasAnyRole("USER")			
 			.antMatchers("/h2-console/**").anonymous()
 			.anyRequest().authenticated()
