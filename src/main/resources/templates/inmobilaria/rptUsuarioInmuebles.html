@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:replace="layout2 :: frgHead">
+<head th:replace="layout1 :: frgHead">
 </head>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3"></script>
 
@@ -9,7 +9,7 @@
 
 	<!-- Page Wrapper -->
 	<div id="wrapper">
-		<ul th:replace="layout2 :: frgSideBar"></ul>
+		<ul th:replace="layout1 :: frgSideBar"></ul>
 		
 		
 		 <!-- Content Wrapper -->
@@ -18,7 +18,7 @@
       <!-- Main Content -->
       <div id="content">
 
-		<nav th:replace="layout2 :: frgTopbar"></nav>
+		<nav th:replace="layout1 :: frgTopbar"></nav>
 
         <!-- Begin Page Content -->
         
@@ -48,7 +48,7 @@
       <!-- End of Main Content -->
 
       <!-- Footer -->
-      <footer th:replace="layout2 :: frgFooter">
+      <footer th:replace="layout1 :: frgFooter">
       </footer>
       <!-- End of Footer -->
 

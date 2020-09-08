@@ -83,7 +83,7 @@ function report(){
 					},
 					title: {
 						display: true,
-						text: 'INMOBILIARIAS CREADAS POR USUARIO'
+						text: 'INMOBILIARIAS CREADAS POR ANUNCIANTES'
 					},
 					scales: {
 				        yAxes: [{

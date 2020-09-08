@@ -454,7 +454,8 @@ public class InmobilariaController {
 	}
 
 	
-	/*========================REPORTE TOMAS =========*/
+	/*========================REPORTE 2T =========*/
+	
 	@GetMapping(value = "/rptUsuarioInmuebles")
 	public String rptUsuariosInmueble(Model model) {
 		return "inmobilaria/rptUsuarioInmuebles";				
