@@ -246,6 +246,52 @@ public class UsuarioController {
 	}
 	
 	/*====================Fin anunciante ============================================*/
+	
+	
+	
+	/*============Crear anunciante forma ilegal================================*/
+	
+	@GetMapping(value="/creacionadministrador")
+	public String creacionadministrador(Model model) {	
+		Usuario usuario = new Usuario();
+		model.addAttribute("usuario", usuario);
+		model.addAttribute("title", "Registro de nuevo usuario");				
+		return "usuario/soloadmin";
+	}
+	
+	
+	
+
+
+	
+	@PostMapping(value="/saveAdministrador")
+	public String saveAdministrador(@Validated Usuario usuario, BindingResult result, Model model,
+			RedirectAttributes flash) {
+		try {
+			if(result.hasErrors())
+			{	
+				model.addAttribute("title", "Registro de nuevo Administrador");
+				model.addAttribute("usuario", usuario);
+				return "usuario/formadmin";
+			}			
+			String pass = usuario.getPassword();
+			usuario.setPassword(encoder.encode(pass));			
+			usuario.getRoles().add(new Rol("ROLE_ADMIN"));
+			usuario.setHabilitado(true);
+			service.save(usuario);
+			flash.addFlashAttribute("success", "El Admimistrador fue agregado con éxito.");
+		}
+		catch(Exception ex) {
+			
+			flash.addFlashAttribute("error", ex.getMessage());
+		}
+		return "redirect:/usuario/list";		
+	} 
+	
+	
+	
+	
+	
 
 
 	

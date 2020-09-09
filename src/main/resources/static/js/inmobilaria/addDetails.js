@@ -43,7 +43,7 @@ function save(){
 	var requestBody = JSON.stringify(dataForm);
 	console.log(requestBody);		
 	$.ajax({
-		url : "http://localhost:8080/inmobilaria/add",
+		url : "https://inmobilaria.herokuapp.com/inmobilaria/add",
 		method : 'POST',
 		contentType : "application/json",
 		headers: {"X-CSRF-TOKEN": $("input[name='_csrf']").val()},
