@@ -36,6 +36,7 @@ import com.grupal.inmobilaria.entities.Detalle;
 import com.grupal.inmobilaria.entities.Inmobilaria;
 import com.grupal.inmobilaria.entities.Movimiento;
 import com.grupal.inmobilaria.entities.Operacion;
+import com.grupal.inmobilaria.entities.Provincia;
 import com.grupal.inmobilaria.entities.Rol;
 import com.grupal.inmobilaria.entities.TipoInmobilaria;
 import com.grupal.inmobilaria.entities.Usuario;
@@ -43,6 +44,7 @@ import com.grupal.inmobilaria.reporting.RptUsuarioInmuebles;
 import com.grupal.inmobilaria.service.IDetalleService;
 import com.grupal.inmobilaria.service.IInmobilariaService;
 import com.grupal.inmobilaria.service.IOperacionService;
+import com.grupal.inmobilaria.service.IProvinciaService;
 import com.grupal.inmobilaria.service.ITipoInmobilariaService;
 import com.grupal.inmobilaria.service.UsuarioService;
 
@@ -63,6 +65,9 @@ public class InmobilariaController {
 
 	@Autowired 
 	private IOperacionService  srvOperacion;
+	
+	@Autowired 
+	private IProvinciaService  srvProvincia;
 	
 
 	@Autowired 
@@ -100,6 +105,10 @@ public class InmobilariaController {
 		List<Operacion> operacion = srvOperacion.findAll() ;
 		model.addAttribute("operaciones", operacion);
 		
+		List<Provincia> provincias = srvProvincia.findAll() ;
+		model.addAttribute("provincias", provincias);
+		
+		
 		return "inmobilaria/form";//la ubicacion de la vista
 	}
 	
@@ -128,6 +137,16 @@ public class InmobilariaController {
 				titulo = "Error al registrar Inmobilaria";
 				model.addAttribute("title", titulo);
 				model.addAttribute("error", "Intentalo otra vez");
+				List<TipoInmobilaria> tipoIs = srvTipoInmo.findAll();
+				model.addAttribute("tipo_inmobilarias", tipoIs);
+				
+
+				List<Operacion> operacion = srvOperacion.findAll() ;
+				model.addAttribute("operaciones", operacion);
+				
+				List<Provincia> provincias = srvProvincia.findAll() ;
+				model.addAttribute("provincias", provincias);
+				
 				return "inmobilaria/form";
 			}
 			
@@ -207,6 +226,10 @@ public class InmobilariaController {
 
 		List<Operacion> operacion = srvOperacion.findAll() ;
 		model.addAttribute("operaciones", operacion);
+		
+		List<Provincia> provincias = srvProvincia.findAll() ;
+		model.addAttribute("provincias", provincias);
+		
 		
 		
 		model.addAttribute("title", "Actualizado el registro de " + inmobilaria.getNombre());
