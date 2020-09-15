@@ -40,6 +40,7 @@ import com.grupal.inmobilaria.entities.Provincia;
 import com.grupal.inmobilaria.entities.Rol;
 import com.grupal.inmobilaria.entities.TipoInmobilaria;
 import com.grupal.inmobilaria.entities.Usuario;
+import com.grupal.inmobilaria.reporting.RptProvinciaDescripcion;
 import com.grupal.inmobilaria.reporting.RptUsuarioInmuebles;
 import com.grupal.inmobilaria.service.IDetalleService;
 import com.grupal.inmobilaria.service.IInmobilariaService;
@@ -488,6 +489,23 @@ public class InmobilariaController {
 	public @ResponseBody List<RptUsuarioInmuebles> dataRptMatriculadosMateria(Model model) {				
 		try {			
 			return this.srvInmobilaria.rptUsuarioInmuebles();
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+			return null;
+		}		
+	}
+	
+/*========================REPORTE 2T =========*/
+	
+	@GetMapping(value = "/rptProvinciaDescripcion")
+	public String rptProvinciaDescripcion(Model model) {
+		return "inmobilaria/rptProvinciaDescripcion";				
+	}
+
+	@GetMapping(value = "/dataRptProvinciaDescripcion", produces="application/json")
+	public @ResponseBody List<RptProvinciaDescripcion> dataRptProvinciaDescripcion(Model model) {				
+		try {			
+			return this.srvInmobilaria.rptProvinciaDescripcion();
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 			return null;

@@ -3,6 +3,7 @@ package com.grupal.inmobilaria.service;
 import java.util.List;
 
 import com.grupal.inmobilaria.entities.Inmobilaria;
+import com.grupal.inmobilaria.reporting.RptProvinciaDescripcion;
 import com.grupal.inmobilaria.reporting.RptUsuarioInmuebles;
 
 
@@ -16,5 +17,7 @@ public interface IInmobilariaService {
 	
 	
 	public List<RptUsuarioInmuebles> rptUsuarioInmuebles();
+	
+	public List<RptProvinciaDescripcion> rptProvinciaDescripcion();
 
 }

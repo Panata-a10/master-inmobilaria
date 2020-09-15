@@ -15,6 +15,7 @@ import com.grupal.inmobilaria.dao.IDetalle;
 import com.grupal.inmobilaria.dao.IInmobilaria;
 import com.grupal.inmobilaria.entities.Detalle;
 import com.grupal.inmobilaria.entities.Inmobilaria;
+import com.grupal.inmobilaria.reporting.RptProvinciaDescripcion;
 import com.grupal.inmobilaria.reporting.RptUsuarioInmuebles;
 
 
@@ -76,6 +77,16 @@ public class InmobiliariaService implements IInmobilariaService {
 		List<Object[]> datos = query.getResultList();		
 		return datos.stream()
 				.map(r -> new RptUsuarioInmuebles((String)r[0], (String)r[1]))
+				.collect(Collectors.toList());		
+	}
+	
+	@Override
+	public List<RptProvinciaDescripcion> rptProvinciaDescripcion() {		
+		StoredProcedureQuery query = em.createStoredProcedureQuery("examen");
+		query.execute();
+		List<Object[]> datos = query.getResultList();		
+		return datos.stream()
+				.map(r -> new RptProvinciaDescripcion((String)r[0], (String)r[1]))
 				.collect(Collectors.toList());		
 	}
 
