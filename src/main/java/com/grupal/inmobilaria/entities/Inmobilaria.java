@@ -43,6 +43,10 @@ public class Inmobilaria implements Serializable  {
 	@Size(max=50)
 	private String nombre;
 	
+	@Column(name="provincia")
+	@NotEmpty
+	@Size(max=50)
+	private String provincia;
 	
 	
 	@Column(name="habitaciones")
@@ -57,6 +61,8 @@ public class Inmobilaria implements Serializable  {
 	@NotEmpty
 	@Size(max=50)
 	private String direccion;
+	
+	
 	
 	@Column(name="valor")
 	private float valor;
@@ -88,9 +94,6 @@ public class Inmobilaria implements Serializable  {
 	
 	
 	
-	@JoinColumn(name ="id_provincia" , referencedColumnName="pk_provincia")
-	@ManyToOne
-	private Provincia provincia;
 	
 	
 	
@@ -236,19 +239,24 @@ public class Inmobilaria implements Serializable  {
 	
 	//------------------DESDE AQUI REPORTE TOMAS-------------------------------//
 	
-	public Provincia getProvincia() {
-		return provincia;
-	}
 
-	public void setProvincia(Provincia provincia) {
-		this.provincia = provincia;
-	}
 
 
 
 
 	@Column(name = "creado_en")
 	private LocalDateTime creadoEn;
+
+	public String getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
+	}
+
+
+
 
 	@Column(name = "creado_por")
 	private String creadoPor;

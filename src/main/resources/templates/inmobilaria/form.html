@@ -46,10 +46,10 @@
 							
 							
 						
-								<select class="form-control" th:field=*{provincia.idProvincia}>
+								<select class="form-control" th:field=*{provincia}>
 									<option value=0> Seleccione una Provincia </option>
 									<option th:each="o : ${provincias}"
-										th:value="${o.idProvincia}" th:text="${o.nombre}">
+										th:value="${o.nombre}" th:text="${o.nombre}">
 									</option>
 								</select>
 						

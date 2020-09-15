@@ -36,8 +36,6 @@ public class Provincia implements Serializable {
 	private String nombre;
 	
 
-	@OneToMany(mappedBy="provincia" , fetch = FetchType.LAZY )
-	private List<Inmobilaria> inmobilaria;
 	
 	
 	public Provincia(Integer idProvincia) {
@@ -71,14 +69,7 @@ public class Provincia implements Serializable {
 	}
 
 
-	public List<Inmobilaria> getInmobilaria() {
-		return inmobilaria;
-	}
 
-
-	public void setInmobilaria(List<Inmobilaria> inmobilaria) {
-		this.inmobilaria = inmobilaria;
-	}
 	
 	
 
